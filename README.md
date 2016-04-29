@@ -1,5 +1,39 @@
 # vue-leaflet
-Vue components for Leaflet maps
+Vue components for Leaflet maps, inspired by [react-leaflet](https://github.com/PaulLeCam/react-leaflet) and [vue-google-maps](https://github.com/GuillaumeLeclerc/vue-google-map)
+
+## Startup
+
+You
+
+``` bash
+<template>
+  <div id="app">
+    <h1>{{ title }}</h1>
+    <map :zoom="zoom" :center="center">
+      <tilelayer :url="url"></tilelayer>
+      <marker :position="center"></marker>
+    </map>
+  </div>
+</template>
+
+<script>
+import map from "./components/Map.vue"
+import tilelayer from "./components/TileLayer"
+import marker from "./components/Marker"
+
+export default {
+  data () {
+    return {
+      title: 'Vue Leaflet Demo',
+      zoom:13,
+      center:[51.505, -0.09],
+      url:"http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+    }
+  },
+  components: {map ,tilelayer,marker}
+}
+</script>
+```
 
 ## Build Setup
 

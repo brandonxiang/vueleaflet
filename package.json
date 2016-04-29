@@ -3,6 +3,10 @@
   "description": "A Vue.js project",
   "author": "brandonxiang",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brandonxiang/vue-leaflet"
+  },
   "scripts": {
     "dev": "webpack-dev-server --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
