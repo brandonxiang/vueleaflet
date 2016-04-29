@@ -2,9 +2,8 @@
   <div id="app">
     <h1>{{ msg }}</h1>
     <map :zoom="13" :center="[51.505, -0.09]">
-          <tilelayer url=""></tilelayer>
+      <tilelayer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></tilelayer>
     </map>
-
   </div>
 
 </template>

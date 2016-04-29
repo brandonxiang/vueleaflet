@@ -1,12 +1,10 @@
+import MapComponent from './mapComponent';
 import Leaflet from 'leaflet'
-export default{
-    data(){
-      return{
-          name:'hello'
-      }  
-    },
+
+export default MapComponent.extend({
     props:['url'],
-    ready(){
+    deferredReady(){
+        Leaflet.tileLayer(this.url).addTo(this.$map);
     }
-}
+})
 
