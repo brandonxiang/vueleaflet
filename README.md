@@ -38,6 +38,8 @@ export default {
 ## Build Setup
 
 ``` bash
+cd vue-leaflet
+
 # install dependencies
 npm install
 
