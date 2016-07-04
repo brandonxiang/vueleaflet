@@ -27,13 +27,18 @@ const eventListeners = {
 
 export default{
 	mixins:[DeferredReadyMixin],
-	props:['center','zoom'],
+	props:['center','zoom','minZoom','maxZoom'],
 	created(){
 		this.mapCreatedDefered = new Q.defer();
 		this.mapCreated = this.mapCreatedDefered.promise;	
 	},
 	ready(){
-		this.mapObject = Leaflet.map("map",{center:this.center,zoom:this.zoom})
+		this.mapObject = Leaflet.map("map",{
+			center:this.center,
+			zoom:this.zoom,
+			minZoom:this.minZoom,
+			maxZoom:this.maxZoom
+		})
 	},
 	events:eventListeners
 }

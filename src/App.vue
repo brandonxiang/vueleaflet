@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>{{ title }}</h1>
-    <map :zoom="zoom" :center="center">
+    <map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
       <tilelayer :url="url" :attribution="attribution"></tilelayer>
       <marker :position="center" ></marker>
     </map>
@@ -19,6 +19,8 @@ export default {
       title: 'Vue Leaflet Demo',
       zoom:13,
       center:[51.505, -0.09],
+      minZoom:8,
+      maxZoom:15,
       url:"http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       attribution:"mymap"
     }
