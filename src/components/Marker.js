@@ -4,7 +4,7 @@ import Leaflet from 'leaflet';
 export default MapComponent.extend({
     props:['position'],
     deferredReady(){
-        Leaflet.Icon.Default.imagePath = "http://cdn.leafletjs.com/leaflet/v0.7.7/images";
+        Leaflet.Icon.Default.imagePath = "../../node_modules/leaflet/dist/images";
         Leaflet.marker(this.position).addTo(this.$map);
     }
 });
