@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>{{ title }}</h1>
     <map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
       <tilelayer :url="url" :attribution="attribution"></tilelayer>
       <marker :position="center" ></marker>
@@ -16,7 +15,6 @@ import marker from "./components/Marker"
 export default {
   data () {
     return {
-      title: 'Vue Leaflet Demo',
       zoom:13,
       center:[51.505, -0.09],
       minZoom:8,
@@ -33,4 +31,8 @@ export default {
 body {
   font-family: Helvetica, sans-serif;
 }
+#app{
+  height:100%;
+}
+
 </style>

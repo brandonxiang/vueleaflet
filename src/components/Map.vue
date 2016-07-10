@@ -44,5 +44,5 @@ export default{
 }
 </script>
 <style type="text/css">
-	#map{height: 800px;width: 800px;}
+	#map{height: 100%;width: 100%;}
 </style>
