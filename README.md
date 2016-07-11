@@ -57,3 +57,6 @@ On the `develop` branch.
 ##License
 
 [MIT](LICENSE)
+
+##Chinese Version
+[中文文档](README_CN.md)
