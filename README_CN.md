@@ -54,4 +54,8 @@ export default {
 </script>
 ```
 
+##英文文档
+
+[English Version](README.md)
+
 转载，请表明出处。[总目录Awesome GIS](http://www.jianshu.com/p/3b3efa92dd6d)
