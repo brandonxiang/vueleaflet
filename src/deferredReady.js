@@ -51,7 +51,7 @@ import Q from 'q'
  * 
  * B.ready -- parent C supports deferredReady. 
  *     
-   **/ 
+   **/
 
 export var DeferredReady = {
   install(Vue, options) {
@@ -74,10 +74,10 @@ function runHooks(vm) {
     }
     return rv;
   })) // execute all handlers, expecting them to return promises
-  // wait for the promises to complete, before allowing child to execute
-  .then(() => {
+    // wait for the promises to complete, before allowing child to execute
+    .then(() => {
       vm.$deferredReadyDeferred.resolve()
-  });
+    });
 }
 
 export var DeferredReadyMixin = {
@@ -97,7 +97,7 @@ export var DeferredReadyMixin = {
   },
 
   events: {
-    'register-deferredReadyChild' (child) {
+    'register-deferredReadyChild'(child) {
       if (this == child)
         return true;
 
@@ -107,7 +107,7 @@ export var DeferredReadyMixin = {
       // after we are done running deferredReady()
       // children should run their deferredReady()
       this.$deferredReadyDeferred.promise
-      .then(() => runHooks(child));
+        .then(() => runHooks(child));
     },
   },
 };
