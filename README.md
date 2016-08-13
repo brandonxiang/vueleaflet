@@ -1,5 +1,5 @@
 # vue-leaflet
-Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](https://github.com/PaulLeCam/react-leaflet) and [vue-google-maps](https://github.com/GuillaumeLeclerc/vue-google-maps)
+Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](https://github.com/PaulLeCam/react-leaflet) and [vue-google-maps](https://github.com/GuillaumeLeclerc/vue-google-maps).
 
 ## Startup
 
@@ -50,9 +50,9 @@ npm run build
 
 For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## Development
+## Contribute
 
-On the `develop` branch.
+All the developments are on the [develop](https://github.com/brandonxiang/vue-leaflet/tree/develop) branch, while the stable version is on the [master](https://github.com/brandonxiang/vue-leaflet/tree/master) branch.
 
 ##License
 

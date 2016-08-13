@@ -1,3 +1,4 @@
+<script>
 import MapComponent from './mapComponent';
 import Leaflet from 'leaflet';
 
@@ -7,4 +8,6 @@ export default MapComponent.extend({
         Leaflet.tileLayer(this.url,{attribution:this.attribution}).addTo(this.$map);
     }
 });
+
+</script>
 

@@ -1,7 +1,5 @@
-import Vue from 'vue'
-import App from './App.vue'
+exports.Map = require('./components/Map.vue') ;
+exports.Tilelayer  =  require("./components/TileLayer.vue");
+exports.Marker = require("./components/Marker.vue");
 
-new Vue({
-  el: 'body',
-  components: { App }
-})
+exports.MapComponent= require('./components/mapComponent');

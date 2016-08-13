@@ -6,7 +6,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: 'build.js'
+    filename: 'vue-leaflet.js',
+    library: ["VueLeaflet"],
+    libraryTarget: "umd"
   },
   resolveLoader: {
     root: path.join(__dirname, 'node_modules'),
