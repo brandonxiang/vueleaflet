@@ -4,10 +4,15 @@ import Leaflet from 'leaflet';
 
 
 export default MapComponent.extend({
-    props:["position"],
+    props:["position", "opacity", "title"],
     deferredReady(){
         Leaflet.Icon.Default.imagePath = "../../node_modules/leaflet/dist/images";
-        Leaflet.marker(this.position).addTo(this.$map);
+        var options ={
+            opacity:this.opacity,
+            title:this.title
+        }
+        Leaflet.marker(this.position, options).addTo(this.$map);
+        
     }
 });
 

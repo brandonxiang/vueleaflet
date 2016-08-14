@@ -25,7 +25,7 @@
   <div id="app">
     <map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
       <tilelayer :url="url" :attribution="attribution"></tilelayer>
-      <marker :position="center" ></marker>
+      <marker :position="center" :title="title" :opacity="opacity"></marker>
     </map>
   </div>
   <script src="../node_modules/vue/dist/vue.js"></script>
@@ -45,7 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
           minZoom:8,
           maxZoom:15,
           url:"http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-          attribution:"mymap"
+          attribution:"mymap",
+          title:"test-marker",
+          opacity:0.6
+
       }
     })
 });
