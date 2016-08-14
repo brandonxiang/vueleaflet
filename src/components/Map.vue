@@ -9,7 +9,7 @@ import Q from 'q';
 import Vue from 'vue'
 import {DeferredReadyMixin} from '../deferredReady.js'
 import {DeferredReady} from '../deferredReady.js'
-import Leaflet from 'leaflet';
+import L from 'leaflet';
 
 Vue.use(DeferredReady);
 
@@ -33,7 +33,7 @@ export default{
 		this.mapCreated = this.mapCreatedDefered.promise;	
 	},
 	ready(){
-		this.mapObject = Leaflet.map("map",{
+		this.mapObject = L.map("map",{
 			center:this.center,
 			zoom:this.zoom,
 			minZoom:this.minZoom,
