@@ -1,10 +1,15 @@
-import MapComponent from './mapComponent';
-import Leaflet from 'leaflet';
+import MapComponent from './mapComponent'
+import { Icon, marker } from 'leaflet'
 
 export default MapComponent.extend({
-    props:['position'],
-    deferredReady(){
-        Leaflet.Icon.Default.imagePath = "../../node_modules/leaflet/dist/images";
-        Leaflet.marker(this.position).addTo(this.$map);
+    props: ['position'],
+    deferredReady() {
+        Icon.Default.imagePath = "../../node_modules/leaflet/dist/images";
+        this.$marker = marker(this.position).addTo(this.$map);
+    },
+    events: {
+        'bindPopup': function(popupContent) {
+            this.$marker.bindPopup(popupContent)
+        }
     }
 });
