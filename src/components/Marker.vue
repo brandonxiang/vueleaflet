@@ -6,7 +6,7 @@
     export default MapComponent.extend({
         props: ["position", "opacity", "title"],
         deferredReady() {
-            L.Icon.Default.imagePath = "../../node_modules/leaflet/dist/images";
+            L.Icon.Default.imagePath = "../../node_modules/leaflet/dist/images/";
             var options = {
                 opacity: this.opacity,
                 title: this.title
@@ -16,6 +16,9 @@
         events: {
             "bindPopup": function(popupContent) {
                 this.$marker.bindPopup(popupContent)
+            },
+            "bindTooltip": function(tooltipContent) {
+                this.$marker.bindTooltip(tooltipContent)
             }
         }
     });
