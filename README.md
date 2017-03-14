@@ -5,6 +5,15 @@ Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](ht
 
 This branch adapes with vue 2.0, vuex and leaflet 1.0.3.
 
+## Completion of components
+
+-   [x] Map
+-   [x] Marker
+-   [] Popup
+-   [] Tooltip
+-   [x] TileLayer
+
+
 ## Build Setup
 
 ``` bash

@@ -1,7 +1,7 @@
 <template lang="html">
   <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
-    <l-marker :position="center" :title="title" :opacity="opacity">
+    <l-marker :position="center" :title="title" :opacity="opacity" draggable="true">
     </l-marker>
   </l-map>
 </template>
@@ -27,7 +27,7 @@ export default {
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution: 'mymap',
       title: 'test-marker',
-      opacity: 0.6,
+      opacity: 1,
     };
   },
 };
