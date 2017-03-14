@@ -5,28 +5,28 @@
 </template>
 
 <script>
-import Mapctrl from './components/map';
-import Tilelayer from './components/Tilelayer'
-import '../node_modules/leaflet/dist/leaflet.css'
+import Mapctrl from './components/Map';
+import Tilelayer from './components/TileLayer';
+import '../node_modules/leaflet/dist/leaflet.css';
 
 export default {
-  components:{
+  components: {
     Mapctrl,
     Tilelayer,
   },
-  data(){
-      return{
-          zoom:13,
-          center: [51.505, -0.09],
-            minZoom: 8,
-            maxZoom: 15,
-            url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-            attribution: "mymap",
-            title: "test-marker",
-            opacity: 0.6
-      }
-  }
-}
+  data() {
+    return {
+      zoom: 13,
+      center: [51.505, -0.09],
+      minZoom: 8,
+      maxZoom: 15,
+      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      attribution: 'mymap',
+      title: 'test-marker',
+      opacity: 0.6,
+    };
+  },
+};
 </script>
 
 <style lang="css">

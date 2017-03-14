@@ -5,28 +5,27 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import L from 'leaflet';
-import {mapMutations} from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default{
-    props:['center','zoom','minZoom','maxZoom'],
-	methods:{
-		...mapMutations([
-			'mapReady',
-		])
-	},
-    mounted(){
-        this.mapObject = L.map("map",{
-			center:this.center,
-			zoom:this.zoom,
-			minZoom:this.minZoom,
-			maxZoom:this.maxZoom
-		})
-		this.mapReady(this.mapObject);
-    },
-    
-}
+  props: ['center', 'zoom', 'minZoom', 'maxZoom'],
+  methods: {
+    ...mapMutations([
+      'mapReady',
+    ]),
+  },
+  mounted() {
+    this.mapObject = L.map('map', {
+      center: this.center,
+      zoom: this.zoom,
+      minZoom: this.minZoom,
+      maxZoom: this.maxZoom,
+    });
+    this.mapReady(this.mapObject);
+  },
+
+};
 
 
 </script>
