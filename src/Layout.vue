@@ -1,18 +1,22 @@
 <template lang="html">
-  <mapctrl :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
-    <tilelayer :url="url" :attribution="attribution"></tilelayer>
-  </mapctrl>
+  <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
+    <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
+    <l-marker :position="center" :title="title" :opacity="opacity">
+    </l-marker>
+  </l-map>
 </template>
 
 <script>
-import Mapctrl from './components/Map';
-import Tilelayer from './components/TileLayer';
+import LMap from './components/Map';
+import LTilelayer from './components/TileLayer';
+import LMarker from './components/Marker';
 import '../node_modules/leaflet/dist/leaflet.css';
 
 export default {
   components: {
-    Mapctrl,
-    Tilelayer,
+    LMap,
+    LTilelayer,
+    LMarker,
   },
   data() {
     return {
