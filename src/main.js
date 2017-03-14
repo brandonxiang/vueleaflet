@@ -1,7 +1,13 @@
-exports.Map = require('./components/Map.vue')
-exports.Tilelayer = require("./components/TileLayer.vue")
-exports.Marker = require("./components/Marker.vue")
-exports.Popup = require("./components/Popup.vue")
-exports.Tooltip = require("./components/ToolTip.vue")
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import Vue from 'vue'
+import store from './vuex/store'
+import App from './Layout'
 
-exports.MapComponent = require('./components/mapComponent')
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  store,
+  template: '<App/>',
+  components: { App }
+})

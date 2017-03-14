@@ -86,8 +86,8 @@ export var DeferredReadyMixin = {
     this.$deferredReadyDeferred = Q.defer();
   },
 
-  ready() {
-    this.$dispatch('register-deferredReadyChild', this);
+  mounted() {
+    this.$on('register-deferredReadyChild', this);
 
     if (!this.$hasDeferredReadyAncestors) {
       // call deferredReady() hook only after ready() has completed

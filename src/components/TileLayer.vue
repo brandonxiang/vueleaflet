@@ -1,12 +1,19 @@
+<template>
+</template>
+
 <script>
-import MapComponent from './mapComponent';
 import L from 'leaflet';
 
-export default MapComponent.extend({
+export default {
     props:['url','attribution'],
-    deferredReady(){
-        L.tileLayer(this.url,{attribution:this.attribution}).addTo(this.$map);
-    }
-});
+    mounted(){
+      const tilelayer = L.tileLayer(this.url,{attribution:this.attribution});
+      
+      this.$nextTick(function(){
+        this.$store.state.map.addLayer(tilelayer);
+      });
+    },
+
+};
 
 </script>

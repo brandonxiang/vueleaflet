@@ -5,47 +5,44 @@
 </template>
 
 <script>
-import Q from 'q';
-import Vue from 'vue'
-import {DeferredReadyMixin} from '../deferredReady.js'
-import {DeferredReady} from '../deferredReady.js'
+import Vue from 'vue';
 import L from 'leaflet';
-
-Vue.use(DeferredReady);
-
-const registerChild = function (child, type) {
-  if (!this.mapObject)
-    throw new Error("Map not initialized");
-  child.$emit('map-ready', this.mapObject);
-  // Simpler: child.$map = mapObject but not so
-  // modular
-}
-
-const eventListeners = {
-  'register-component': registerChild,
-}
+import {mapMutations} from 'vuex';
 
 export default{
-	mixins:[DeferredReadyMixin],
-	props:['center','zoom','minZoom','maxZoom'],
-	created(){
-		this.mapCreatedDefered = new Q.defer();
-		this.mapCreated = this.mapCreatedDefered.promise;	
+    props:['center','zoom','minZoom','maxZoom'],
+	methods:{
+		...mapMutations([
+			'mapReady',
+		])
 	},
-	ready(){
-		this.mapObject = L.map("map",{
+    mounted(){
+        this.mapObject = L.map("map",{
 			center:this.center,
 			zoom:this.zoom,
 			minZoom:this.minZoom,
 			maxZoom:this.maxZoom
 		})
-	},
-	events:eventListeners
+		this.mapReady(this.mapObject);
+    },
+    
 }
+
+
 </script>
-<style type="text/css">
-	#map {
-		height: 100%;
-		width: 100%;
-	}
+
+<style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        #map {
+            height: 100%;
+        }
 </style>
