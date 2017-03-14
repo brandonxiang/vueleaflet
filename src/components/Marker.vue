@@ -2,8 +2,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import L from 'leaflet';
-
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
@@ -31,6 +31,11 @@ const props = {
 
 export default {
   props,
+  computed: {
+    ...mapGetters([
+      'getMap',
+    ]),
+  },
   mounted() {
     const DefaultIcon = L.icon({
       iconUrl: icon,
@@ -48,7 +53,7 @@ export default {
     const marker = L.marker(this.position, options);
 
     this.$nextTick(function () {
-      this.$store.state.map.addLayer(marker);
+      this.getMap.addLayer(marker);
     });
   },
 

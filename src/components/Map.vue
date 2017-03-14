@@ -24,24 +24,13 @@ export default{
     });
     this.mapReady(this.mapObject);
   },
-
 };
 
 
 </script>
 
 <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
-
-        html,
-        body {
-            height: 100%;
-        }
-
-        #map {
-            height: 100%;
-        }
+#map {
+    height: 100%;
+}
 </style>

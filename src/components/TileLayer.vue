@@ -2,15 +2,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import L from 'leaflet';
 
 export default {
   props: ['url', 'attribution'],
+  computed: {
+    ...mapGetters([
+      'getMap',
+    ]),
+  },
   mounted() {
     const tilelayer = L.tileLayer(this.url, { attribution: this.attribution });
 
     this.$nextTick(function () {
-      this.$store.state.map.addLayer(tilelayer);
+      this.getMap.addLayer(tilelayer);
     });
   },
 
