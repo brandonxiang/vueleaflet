@@ -42,6 +42,6 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 All the developments are on the [develop](https://github.com/brandonxiang/vue-leaflet/tree/develop) branch, while the stable version is on the [master](https://github.com/brandonxiang/vue-leaflet/tree/master) branch.
 
-##License
+## License
 
 [MIT](LICENSE)
