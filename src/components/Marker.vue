@@ -4,16 +4,18 @@
 <script>
 import { mapGetters } from 'vuex';
 import L from 'leaflet';
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 const props = {
   position: {
-    type: Object,
+    type: Array,
   },
   icon: {
     custom: false,
-    default() { return new L.Icon.Default(); },
+    default:require('leaflet/dist/images/marker-icon.png')
+  },
+  iconShadow: {
+    custom: false,
+    default:require('leaflet/dist/images/marker-shadow.png')
   },
   draggable: {
     type: Boolean,
@@ -38,8 +40,8 @@ export default {
   },
   mounted() {
     const DefaultIcon = L.icon({
-      iconUrl: icon,
-      shadowUrl: iconShadow,
+      iconUrl: this.icon,
+      shadowUrl: this.iconShadow,
     });
 
     L.Marker.prototype.options.icon = DefaultIcon;

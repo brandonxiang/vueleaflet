@@ -13,7 +13,7 @@ const props = {
     custom: true,
     default: undefined,
   },
-  bounds: {
+  maxBounds: {
     custom: true,
     default: undefined,
   },
@@ -60,6 +60,7 @@ export default{
       zoom: this.zoom,
       minZoom: this.minZoom,
       maxZoom: this.maxZoom,
+			maxBounds:this.maxBounds,
     };
 
     this.mapObject = L.map('map', options);

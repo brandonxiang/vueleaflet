@@ -1,7 +1,7 @@
 <template lang="html">
   <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
-    <l-marker :position="center" :title="title" :opacity="opacity" draggable="true">
+    <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
     </l-marker>
   </l-map>
 </template>
@@ -28,6 +28,7 @@ export default {
       attribution: 'mymap',
       title: 'test-marker',
       opacity: 1,
+      draggable:true
     };
   },
 };
