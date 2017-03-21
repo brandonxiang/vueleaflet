@@ -2,6 +2,7 @@
   <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
     <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
+      <l-popup content="Hello world"></l-popup>
     </l-marker>
   </l-map>
 </template>
@@ -10,6 +11,7 @@
 import LMap from './components/Map';
 import LTilelayer from './components/TileLayer';
 import LMarker from './components/Marker';
+import LPopup from './components/Popup';
 import '../node_modules/leaflet/dist/leaflet.css';
 
 export default {
@@ -17,6 +19,7 @@ export default {
     LMap,
     LTilelayer,
     LMarker,
+    LPopup,
   },
   data() {
     return {

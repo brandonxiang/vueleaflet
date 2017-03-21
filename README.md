@@ -9,8 +9,8 @@ This branch adapes with vue 2.0, vuex and leaflet 1.0.3.
 
 -   [x] Map
 -   [x] Marker
--   [] Popup
--   [] Tooltip
+-   [x] Popup
+-   [x] Tooltip
 -   [x] TileLayer
 
 

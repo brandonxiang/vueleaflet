@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -16,6 +19,10 @@ const props = {
   iconShadow: {
     custom: false,
     default:require('leaflet/dist/images/marker-shadow.png')
+  },
+  iconRetina:{
+    custom:false,
+    default:require('leaflet/dist/images/marker-icon-2x.png')
   },
   draggable: {
     type: Boolean,
@@ -39,12 +46,7 @@ export default {
     ]),
   },
   mounted() {
-    const DefaultIcon = L.icon({
-      iconUrl: this.icon,
-      shadowUrl: this.iconShadow,
-    });
-
-    L.Marker.prototype.options.icon = DefaultIcon;
+    this.fixImageUrl();
 
     const options = {
       draggable: this.draggable,
@@ -52,12 +54,23 @@ export default {
       title: this.title,
     };
 
-    const marker = L.marker(this.position, options);
+    const marker = this.$marker = L.marker(this.position, options);
 
     this.$nextTick(function () {
       this.getMap.addLayer(marker);
     });
   },
+  methods: {
+       fixImageUrl() {
+           //https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-261904061
+           delete L.Icon.Default.prototype._getIconUrl
+           L.Icon.Default.mergeOptions({
+               iconRetinaUrl: this.iconRetina,
+               iconUrl: this.icon,
+               shadowUrl: this.iconShadow,
+           });
+       }
+   }
 
 };
 
