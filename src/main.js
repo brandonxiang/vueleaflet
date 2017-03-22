@@ -1,10 +1,11 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import store from './vuex/store';
+import Vuex from 'vuex';
+import module from './vuex/store';
 import App from './Layout';
 
-/* eslint-disable no-new */
+Vue.use(Vuex);
+const store = new Vuex.Store(module)
+
 new Vue({
   el: '#app',
   store,

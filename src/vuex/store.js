@@ -1,8 +1,3 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-
-Vue.use(Vuex);
-
 const state = {
   map: null,
 };
@@ -17,7 +12,7 @@ const getters = {
   getMap: stat => stat.map,
 };
 
-export default new Vuex.Store({
+export default({
   state,
   mutations,
   getters,

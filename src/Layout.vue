@@ -2,8 +2,10 @@
   <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
     <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
-      <!-- <l-popup content="Hello world"></l-popup> -->
-      <l-tooltip content="Hello world"></l-tooltip>
+      <l-tooltip content="a tooltip"></l-tooltip>
+    </l-marker>
+    <l-marker :position="marker" :title="title" :opacity="opacity" :draggable="false">
+      <l-popup content="a popup"></l-popup>
     </l-marker>
   </l-map>
 </template>
@@ -28,6 +30,7 @@ export default {
     return {
       zoom: 13,
       center: [51.505, -0.09],
+      marker: [51.500,0.00],
       minZoom: 8,
       maxZoom: 15,
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
