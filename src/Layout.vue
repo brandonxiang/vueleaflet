@@ -11,21 +11,9 @@
 </template>
 
 <script>
-import LMap from './components/Map';
-import LTilelayer from './components/TileLayer';
-import LMarker from './components/Marker';
-import LPopup from './components/Popup';
-import LTooltip from './components/Tooltip';
 import '../node_modules/leaflet/dist/leaflet.css';
 
 export default {
-  components: {
-    LMap,
-    LTilelayer,
-    LMarker,
-    LPopup,
-    LTooltip,
-  },
   data() {
     return {
       zoom: 13,

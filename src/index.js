@@ -7,25 +7,19 @@ import LTooltip from './components/Tooltip';
 
 let plugin = {};
 
-const components=[
-  LMap,
-  LTilelayer,
-  LMarker,
-  LPopup,
-  LTooltip,
-]
-
 plugin.install = function install(Vue, store, moduleName = 'VL'){
   if(store.state.hasOwnProperty(moduleName)===false){
     console.error('vue-leaflet module is not correctly initialized. Please check the module name:', moduleName);
   }
 
-  components.map(component =>{
-    Vue.component(component.name,component);
-  })
+  Vue.component('LMap', LMap);
+  Vue.component('LTilelayer', LTilelayer);
+  Vue.component('LMarker', LMarker);
+  Vue.component('LPopup', LPopup);
+  Vue.component('LTooltip', LTooltip);
 }
 
-module.exports = {
+export default {
   store,
   plugin,
   LMap,

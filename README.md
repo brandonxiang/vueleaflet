@@ -3,7 +3,7 @@ Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](ht
 
 > A vue component for leaflet.js
 
-This branch adapes with vue 2.0, vuex and leaflet 1.0.3.
+This branch adapes with vue 2.0, vuex 2.0 and leaflet 1.0.3.
 
 ## Completion of components
 
@@ -13,6 +13,54 @@ This branch adapes with vue 2.0, vuex and leaflet 1.0.3.
 -   [x] Tooltip
 -   [x] TileLayer
 
+## Installation
+
+```
+npm install vueleaflet -save
+```
+
+## Startup
+
+You can input some Vue-styled components in a .vue file in order to use leafletjsm, like [Layout.vue](src/Layout.vue).
+
+```
+<l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
+  <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
+  <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
+    <l-tooltip content="a tooltip"></l-tooltip>
+  </l-marker>
+  <l-marker :position="marker" :title="title" :opacity="opacity" :draggable="false">
+    <l-popup content="a popup"></l-popup>
+  </l-marker>
+</l-map>
+```
+
+Before that, you should config the vuex, see [main.js](src/main.js)
+
+```
+import Vue from 'vue';
+import Vuex from 'vuex';
+import VueLeaflet from './index'
+import App from './Layout';
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store({
+  modules:{
+    VL: VueLeaflet.store,
+  }
+});
+
+Vue.use(VueLeaflet.plugin,store);
+
+new Vue({
+  el: '#app',
+  store,
+  template: '<App/>',
+  components: { App },
+});
+
+```
 
 ## Build Setup
 

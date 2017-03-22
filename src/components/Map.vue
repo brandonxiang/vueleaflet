@@ -63,8 +63,8 @@ export default{
 			maxBounds:this.maxBounds,
     };
 
-    this.mapObject = L.map('map', options);
-    this.mapReady(this.mapObject);
+    const mapObject = L.map('map', options);
+    this.mapReady(mapObject);
   },
 };
 
