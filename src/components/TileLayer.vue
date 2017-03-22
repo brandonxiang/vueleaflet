@@ -18,7 +18,7 @@ export default {
     this.$nextTick(function () {
       this.getMap.addLayer(tilelayer);
     });
-  },
+  }
 
 };
 

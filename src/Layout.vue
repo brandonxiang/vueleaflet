@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="css">
+#map{
+  height:100%;
+}
 
 body {
     padding: 0;

@@ -1,9 +1,9 @@
-import store from './vuex/store';
-import LMap from './components/Map';
-import LTilelayer from './components/TileLayer';
-import LMarker from './components/Marker';
-import LPopup from './components/Popup';
-import LTooltip from './components/Tooltip';
+import store from './vuex/store.js';
+import LMap from './components/Map.vue';
+import LTilelayer from './components/TileLayer.vue';
+import LMarker from './components/Marker.vue';
+import LPopup from './components/Popup.vue';
+import LTooltip from './components/Tooltip.vue';
 
 let plugin = {};
 
