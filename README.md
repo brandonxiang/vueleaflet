@@ -3,7 +3,7 @@ Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](ht
 
 > A vue component for leaflet.js
 
-This branch adapes with vue 2.0, vuex 2.0 and leaflet 1.0.3.
+This branch adapts with vue 2.0, vuex 2.0 and leaflet 1.0.3.
 
 ## Completion of components
 
@@ -21,7 +21,7 @@ npm install vueleaflet -save
 
 ## Startup
 
-You can input some Vue-styled components in a .vue file in order to use leafletjsm, like [Layout.vue](src/Layout.vue).
+You can input some Vue-styled components in a .vue file in order to use leaflet.js, like [Layout.vue](src/Layout.vue).
 
 ```
 <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
