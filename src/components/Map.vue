@@ -1,7 +1,7 @@
 <template>
-	<div id="map">
-		<slot></slot>
-	</div>
+  <div id="map">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -15,7 +15,7 @@ const props = {
   },
   maxBounds: {
     custom: true,
-    default: undefined,
+    default: null,
   },
   zoom: {
     type: Number,
@@ -29,25 +29,17 @@ const props = {
     type: Number,
     default: undefined,
   },
-  paddingBottomRight: {
-    custom: true,
-    default: null,
-  },
-  paddingTopLeft: {
-    custom: true,
-    default: null,
-  },
-  padding: {
-    custom: true,
-    default: null,
-  },
-  worldCopyJump: {
+  attributionControl:{
     type: Boolean,
-    default: false,
+    default: true,
+  },
+  zoomControl:{
+    type: Boolean,
+    default: true,
   },
 };
 
-export default{
+export default {
   props,
   methods: {
     ...mapMutations([
@@ -60,13 +52,14 @@ export default{
       zoom: this.zoom,
       minZoom: this.minZoom,
       maxZoom: this.maxZoom,
-			maxBounds:this.maxBounds,
+      maxBounds: this.maxBounds,
+      attributionControl:this.attributionControl,
+      zoomControl:this.zoomControl,
     };
 
     const mapObject = L.map('map', options);
     this.mapReady(mapObject);
   },
 };
-
 
 </script>

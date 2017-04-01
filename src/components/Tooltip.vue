@@ -20,7 +20,5 @@ export default {
         this.$parent.$marker.bindTooltip(this.content).openTooltip();
     })
   }
-
-
 }
 </script>
