@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import L from 'leaflet';
+
 import { mapMutations } from 'vuex';
 
 const props = {
@@ -46,6 +46,7 @@ export default {
   methods: {
     ...mapMutations([
       'mapReady',
+      'addEvent',
     ]),
   },
   mounted() {
@@ -59,8 +60,8 @@ export default {
       zoomControl:this.zoomControl,
     };
 
-    const mapObject = L.map('map', options);
-    this.mapReady(mapObject);
+    this.mapReady({name:'map',options:options});
+    this.addEvent({event:'zoomend',func:()=>console.log(1)})
   },
 };
 
