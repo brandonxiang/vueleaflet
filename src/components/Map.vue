@@ -12,14 +12,16 @@ const props = {
   center: {
     custom: true,
     default: undefined,
-  },
-  maxBounds: {
-    custom: true,
-    default: null,
+    require: true
   },
   zoom: {
     type: Number,
     default: undefined,
+    require:true,
+  },
+  maxBounds: {
+    custom: true,
+    default: null,
   },
   minZoom: {
     type: Number,

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 import L from 'leaflet';
 
 const props = {
@@ -14,15 +14,15 @@ const props = {
   },
   icon: {
     custom: false,
-    default:require('leaflet/dist/images/marker-icon.png')
+    default: require('leaflet/dist/images/marker-icon.png')
   },
   iconShadow: {
     custom: false,
-    default:require('leaflet/dist/images/marker-shadow.png')
+    default: require('leaflet/dist/images/marker-shadow.png')
   },
-  iconRetina:{
-    custom:false,
-    default:require('leaflet/dist/images/marker-icon-2x.png')
+  iconRetina: {
+    custom: false,
+    default: require('leaflet/dist/images/marker-icon-2x.png')
   },
   draggable: {
     type: Boolean,
@@ -40,10 +40,19 @@ const props = {
 
 export default {
   props,
-  computed: {
-    ...mapGetters([
-      'getMap',
+  methods: {
+    ...mapMutations([
+      "addLayer"
     ]),
+    fixImageUrl() {
+      //https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-261904061
+      delete L.Icon.Default.prototype._getIconUrl
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl: this.iconRetina,
+        iconUrl: this.icon,
+        shadowUrl: this.iconShadow,
+      });
+    }
   },
   mounted() {
     this.fixImageUrl();
@@ -57,20 +66,9 @@ export default {
     const marker = this.$marker = L.marker(this.position, options);
 
     this.$nextTick(function () {
-      this.getMap.addLayer(marker);
+      this.addLayer(marker);
     });
   },
-  methods: {
-       fixImageUrl() {
-           //https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-261904061
-           delete L.Icon.Default.prototype._getIconUrl
-           L.Icon.Default.mergeOptions({
-               iconRetinaUrl: this.iconRetina,
-               iconUrl: this.icon,
-               shadowUrl: this.iconShadow,
-           });
-       }
-   }
 
 };
 

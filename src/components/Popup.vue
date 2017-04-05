@@ -1,9 +1,10 @@
 <template>
+  
 </template>
 
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapMutations } from 'vuex';
 import L from 'leaflet';
 
 const props = {
@@ -12,32 +13,30 @@ const props = {
     custom: true,
     default: '',
   },
-  latlng:{
+  latlng: {
     type: Array,
   },
 };
 
 export default {
   props,
-  computed: {
-    ...mapGetters([
-      'getMap',
+  methods: {
+    ...mapMutations([
+      'openPopup',
     ]),
   },
-  mounted(){
-    if(this.latlng){
+  mounted() {
+    if (this.latlng) {
       var popup = L.popup()
         .setLatLng(this.latlng)
         .setContent(this.content);
 
-      const map = this.getMap();
-
       this.$nextTick(function () {
-        popup.openOn(map);
+        this.openPopup(popup)
       });
-    }else{
-      this.$nextTick(function(){
-          this.$parent.$marker.bindPopup(this.content).openPopup();
+    } else {
+      this.$nextTick(function () {
+        this.$parent.$marker.bindPopup(this.content).openPopup();
       })
     }
   }
