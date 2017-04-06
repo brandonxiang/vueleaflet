@@ -1,5 +1,5 @@
 <template>
-  <div id="map">
+  <div :id="id">
     <slot></slot>
   </div>
 </template>
@@ -9,6 +9,11 @@
 import { mapMutations } from 'vuex';
 
 const props = {
+  id:{
+    type: String,
+    default: 'map',
+    require: true,
+  },
   center: {
     custom: true,
     default: undefined,
@@ -17,7 +22,7 @@ const props = {
   zoom: {
     type: Number,
     default: undefined,
-    require:true,
+    require: true,
   },
   maxBounds: {
     custom: true,
@@ -31,11 +36,11 @@ const props = {
     type: Number,
     default: undefined,
   },
-  attributionControl:{
+  attributionControl: {
     type: Boolean,
     default: true,
   },
-  zoomControl:{
+  zoomControl: {
     type: Boolean,
     default: true,
   },
@@ -47,6 +52,7 @@ export default {
     ...mapMutations([
       'mapReady',
       'addEvent',
+      'locate',
     ]),
   },
   mounted() {
@@ -56,12 +62,13 @@ export default {
       minZoom: this.minZoom,
       maxZoom: this.maxZoom,
       maxBounds: this.maxBounds,
-      attributionControl:this.attributionControl,
-      zoomControl:this.zoomControl,
+      attributionControl: this.attributionControl,
+      zoomControl: this.zoomControl,
     };
 
-    this.mapReady({name:'map',options:options});
-    this.addEvent({event:'zoomend',func:()=>console.log(1)})
+    this.mapReady({ name: this.id, options: options });
+    // this.addEvent({ event: 'zoomend', func: () => console.log(1) })
+    // this.addEvent({ event: 'click', func: () => { this.locate() } })
   },
 };
 

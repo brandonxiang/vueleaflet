@@ -1,4 +1,5 @@
 <template lang="html">
+<div class="full">
   <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom" :attributionControl="attributionControl">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
     <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
@@ -8,6 +9,10 @@
       <l-popup content="a popup"></l-popup>
     </l-marker>
   </l-map>
+
+  <l-map id="next">
+  </l-map>
+  </div>
 </template>
 
 <script>
@@ -33,8 +38,13 @@ export default {
 </script>
 
 <style lang="css">
-#map{
+.full{
+  width:100%;
   height:100%;
+}
+
+#map,#next{
+  height:50%;
 }
 
 body {
