@@ -10,8 +10,8 @@
     </l-marker>
   </l-map>
 
-  <l-map id="next">
-  </l-map>
+  <!--<l-map id="next">
+  </l-map>-->
   </div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 }
 
 #map,#next{
-  height:50%;
+  height:100%;
 }
 
 body {

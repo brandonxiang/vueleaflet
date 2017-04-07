@@ -1,12 +1,14 @@
 import L from 'leaflet';
 
 const state = {
-  map: null,
+  map:null,
+  maps: [],
 };
 
 const mutations = {
   mapReady(stat, {name,options}) {
-    stat.map = L.map(name,options);
+    stat.map = L.map(name,options)
+    stat.maps.push({id: name, map:stat.map})
   },
   addControl(stat,control){
     stat.map.addControl(control)
@@ -40,11 +42,14 @@ const mutations = {
   },
   locate(stat,options){
     stat.map.locate(options);
+  },
+  switchMap(stat, id){
+    stat.map = this.getters.getMap[id]
   }
 };
 
 const getters = {
-  getMap: stat => stat.map,
+  getMap: (stat,id) => stat.maps.filter((item)=>item.id===id),
 };
 
 export default({

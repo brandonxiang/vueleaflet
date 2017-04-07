@@ -5,13 +5,10 @@ import App from './Layout';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
-  modules:{
-    VL: VueLeaflet.store,
-  }
-});
+//Add your customized store
+const store = new Vuex.Store();
 
-Vue.use(VueLeaflet.plugin,store);
+Vue.use(VueLeaflet.plugin, store);
 
 new Vue({
   el: '#app',
