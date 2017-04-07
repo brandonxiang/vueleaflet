@@ -8,8 +8,46 @@
 
 import { mapMutations } from 'vuex';
 
+const events = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseover',
+  'mouseout',
+  'mousemove',
+  'contextmenu',
+  'focus',
+  'blur',
+  'preclick',
+  'load',
+  'unload',
+  'viewreset',
+  'movestart',
+  'move',
+  'moveend',
+  'dragstart',
+  'drag',
+  'dragend',
+  'zoomstart',
+  'zoomend',
+  'zoomanim',
+  'zoomlevelschange',
+  'resize',
+  'autopanstart',
+  'layeradd',
+  'layerremove',
+  'baselayerchange',
+  'overlayadd',
+  'overlayremove',
+  'locationfound',
+  'locationerror',
+  'popupopen',
+  'popupclose'
+];
+
 const props = {
-  id:{
+  id: {
     type: String,
     default: 'map',
     require: true,
@@ -67,8 +105,9 @@ export default {
     };
 
     this.mapReady({ name: this.id, options: options });
-    // this.addEvent({ event: 'zoomend', func: () => console.log(1) })
-    // this.addEvent({ event: 'click', func: () => { this.locate() } })
+    events.forEach((event, index) => {
+      this.addEvent({ event, func: (ev) => { this.$emit(event, ev) } })
+    })
   },
 };
 

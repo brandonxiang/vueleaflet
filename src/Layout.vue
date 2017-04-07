@@ -1,6 +1,6 @@
 <template lang="html">
 <div class="full">
-  <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom" :attributionControl="attributionControl">
+  <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom" :attributionControl="attributionControl" :zoomend="zoomend">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
     <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
       <l-tooltip content="a tooltip"></l-tooltip>
@@ -34,6 +34,11 @@ export default {
       attributionControl:false,
     };
   },
+  methods:{
+    zoomend(){
+      console.log(1)
+    }
+  }
 };
 </script>
 

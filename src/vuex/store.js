@@ -3,11 +3,11 @@ import getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  map:null,
+  map: null,
   maps: [],
 };
 
-export default({
+export default ({
   state,
   mutations,
   getters,
