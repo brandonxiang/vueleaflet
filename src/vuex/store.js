@@ -7,8 +7,8 @@ const state = {
   maps: [],
 };
 
-export default ({
+export default {
   state,
   mutations,
   getters,
-});
+};

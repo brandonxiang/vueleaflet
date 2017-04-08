@@ -8,6 +8,25 @@
 import { mapMutations } from 'vuex';
 import L from 'leaflet';
 
+const events = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseover',
+  'mouseout',
+  'contextmenu',
+  'dragstart',
+  'drag',
+  'dragend',
+  'move',
+  'add',
+  'remove',
+  'popupopen',
+  'popupclose',
+  'tooltipopen',
+  'tooltipclose'
+];
+
 const props = {
   position: {
     type: Array,
@@ -28,6 +47,11 @@ const props = {
     type: Boolean,
     custom: true,
     default: false,
+  },
+  visible: {
+    type: Boolean,
+    custom: true,
+    default: true,
   },
   opacity: {
     type: Number,
@@ -67,6 +91,9 @@ export default {
 
     this.$nextTick(function () {
       this.addLayer(marker);
+      events.forEach((event) => {
+        marker.on({ event, func: (ev) => { this.$emit(event, ev) } })
+      })
     });
   },
 
