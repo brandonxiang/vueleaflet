@@ -1,42 +1,42 @@
 export default {
   mapReady(state, { name, options }) {
-    state.map = L.map(name, options)
-    state.maps.push({ id: name, map: state.map })
+    state.mapid = name
+    state.maps[name] = L.map(name, options)
   },
   addControl(state, control) {
-    state.map.addControl(control)
+    state.maps[state.mapid].addControl(control)
   },
   removeControl(state, control) {
-    state.map.removeControl(control)
+    state.maps[state.mapid].removeControl(control)
   },
   addLayer(state, layer) {
-    state.map.addLayer(layer)
+    state.maps[state.mapid].addLayer(layer)
   },
   hasLayer(state, layer) {
-    return state.map.hasLayer(layer)
+    return state.maps[state.mapid].hasLayer(layer)
   },
   removeLayer(state, layer) {
-    state.map.removeLayer(layer)
+    state.maps[state.mapid].removeLayer(layer)
   },
   openPopup(state, popup) {
-    state.map.openPopup(popup)
+    state.maps[state.mapid].openPopup(popup)
   },
   closePopup(state, popup) {
-    state.map.closePopup(popup)
+    state.maps[state.mapid].closePopup(popup)
   },
   openTooltip(state, tooltip) {
-    state.map.openTooltip(tooltip)
+    state.maps[state.mapid].openTooltip(tooltip)
   },
   closeTooltip(state, tooltip) {
-    state.map.closeTooltip(tooltip)
+    state.maps[state.mapid].closeTooltip(tooltip)
   },
   addEvent(state, { event, func }) {
-    state.map.on(event, func)
+    state.maps[state.mapid].on(event, func)
   },
   locate(state, options) {
-    state.map.locate(options);
+    state.maps[state.mapid].locate(options);
   },
   switchMap(state, id) {
-    state.map = this.getters.getMap[id]
+    state.mapid = id
   }
 };

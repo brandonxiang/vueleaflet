@@ -8,7 +8,7 @@ import LTooltip from './components/Tooltip.vue';
 let plugin = {};
 
 plugin.install = function(Vue, store, moduleName = 'VL'){
-  if(this.installed) return
+  // if(this.installed) return
   
   store.registerModule(moduleName, module)
 

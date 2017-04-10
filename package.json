@@ -1,6 +1,6 @@
 {
   "name": "vueleaflet",
-  "version": "2.0.9",
+  "version": "2.0.12",
   "description": "A vue component for leaflet.js",
   "author": "brandonxiang <1542453460@qq.com>",
   "main": "dist/vueleaflet.js",
