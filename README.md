@@ -45,11 +45,7 @@ import App from './Layout';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
-  modules:{
-    VL: VueLeaflet.store,
-  }
-});
+const store = new Vuex.Store({});
 
 Vue.use(VueLeaflet.plugin,store);
 
