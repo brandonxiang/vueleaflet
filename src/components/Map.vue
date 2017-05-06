@@ -86,8 +86,6 @@ export default {
     },
   },
 
-
-
   mounted() {
     const options = {
       center: this.center,

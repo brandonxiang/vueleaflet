@@ -23,6 +23,8 @@ export const closeTooltip = (state, tooltip) => state.maps[state.mapid].closeToo
 
 export const addEvent = (state, { event, func }) => state.maps[state.mapid].on(event, func)
 
+export const removeEvent = (state, { event, func }) => state.maps[state.mapid].off(event, func)
+
 export const locate = (state, options) => state.maps[state.mapid].locate(options)
 
 export const switchMap = (state, id) => state.mapid = id
