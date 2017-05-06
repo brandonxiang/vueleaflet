@@ -1,4 +1,4 @@
-import module from './vuex/store.js';
+import module from './vuex';
 import LMap from './components/Map.vue';
 import LTilelayer from './components/TileLayer.vue';
 import LMarker from './components/Marker.vue';

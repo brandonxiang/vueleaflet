@@ -1,4 +1,2 @@
-export default {
-  getMap: (state) => state.maps[state.mapid],
-  getMapById: (state, id) => state.maps[id],
-};
+export const getMap =  (state) => state.maps[state.mapid]
+export const getMapById=  (state, id) => state.maps[id]

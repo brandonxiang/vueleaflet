@@ -46,53 +46,48 @@ const events = [
   'popupclose'
 ];
 
-const props = {
-  id: {
-    type: String,
-    default: 'map',
-    require: true,
-  },
-  center: {
-    custom: true,
-    default: undefined,
-    require: true
-  },
-  zoom: {
-    type: Number,
-    default: undefined,
-    require: true,
-  },
-  maxBounds: {
-    custom: true,
-    default: null,
-  },
-  minZoom: {
-    type: Number,
-    default: undefined,
-  },
-  maxZoom: {
-    type: Number,
-    default: undefined,
-  },
-  attributionControl: {
-    type: Boolean,
-    default: true,
-  },
-  zoomControl: {
-    type: Boolean,
-    default: true,
-  },
-};
 
 export default {
-  props,
-  methods: {
-    ...mapMutations([
-      'mapReady',
-      'addEvent',
-      'locate',
-    ]),
+  props: {
+    id: {
+      type: String,
+      default: 'map',
+      require: true,
+    },
+    center: {
+      custom: true,
+      default: undefined,
+      require: true
+    },
+    zoom: {
+      type: Number,
+      default: undefined,
+      require: true,
+    },
+    maxBounds: {
+      custom: true,
+      default: null,
+    },
+    minZoom: {
+      type: Number,
+      default: undefined,
+    },
+    maxZoom: {
+      type: Number,
+      default: undefined,
+    },
+    attributionControl: {
+      type: Boolean,
+      default: true,
+    },
+    zoomControl: {
+      type: Boolean,
+      default: true,
+    },
   },
+
+
+
   mounted() {
     const options = {
       center: this.center,
@@ -108,6 +103,14 @@ export default {
     events.forEach((event, index) => {
       this.addEvent({ event, func: (ev) => { this.$emit(event, ev) } })
     })
+  },
+
+  methods: {
+    ...mapMutations([
+      'mapReady',
+      'addEvent',
+      'locate',
+    ]),
   },
 };
 

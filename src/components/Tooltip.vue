@@ -1,4 +1,5 @@
 <template>
+  
 </template>
 
 <script>
@@ -14,22 +15,23 @@ const events = [
   'tooltipclose'
 ];
 
-const props = {
-  content: {
-    type: String,
-    custom: true,
-    default: '',
-  },
-};
 
 export default {
-  props,
-  mounted(){
-    this.$nextTick(function(){
-        this.$parent.$marker.bindTooltip(this.content).openTooltip();
-        // events.forEach((event) => {
-        //   popup.on({ event, func: (ev) => { this.$emit(event, ev) } })
-        // })
+  
+  props: {
+    content: {
+      type: String,
+      custom: true,
+      default: '',
+    },
+  },
+
+  mounted() {
+    this.$nextTick(function () {
+      this.$parent.$marker.bindTooltip(this.content).openTooltip();
+      // events.forEach((event) => {
+      //   popup.on({ event, func: (ev) => { this.$emit(event, ev) } })
+      // })
     })
   }
 }

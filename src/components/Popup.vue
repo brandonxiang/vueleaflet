@@ -16,24 +16,18 @@ const events = [
   'tooltipclose'
 ];
 
-const props = {
-  content: {
-    type: String,
-    custom: true,
-    default: '',
-  },
-  latlng: {
-    type: Array,
-  },
-};
-
 export default {
-  props,
-  methods: {
-    ...mapMutations([
-      'openPopup',
-    ]),
+  props: {
+    content: {
+      type: String,
+      custom: true,
+      default: '',
+    },
+    latlng: {
+      type: Array,
+    },
   },
+
   mounted() {
     if (this.latlng) {
       var popup = L.popup()
@@ -52,6 +46,12 @@ export default {
         //TODO: popup
       })
     }
-  }
+  },
+
+  methods: {
+    ...mapMutations([
+      'openPopup',
+    ]),
+  },
 }
 </script>
