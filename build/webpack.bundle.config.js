@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-var utils = require('./utils')
+const utils = require('./utils')
+const nodeExternals = require('webpack-node-externals')
 
 const config = module.exports = {
   plugins: []
@@ -72,6 +73,7 @@ config.module = {
     },
   ]
 };
+console.log(process.env.NODE_ENV)
 
 if (process.env.NODE_ENV === 'production') {
   config.output.filename = "vueleaflet.min.js"
