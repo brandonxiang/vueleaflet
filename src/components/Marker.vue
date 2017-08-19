@@ -7,6 +7,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import L from 'leaflet';
+import bus from '@/bus'
 
 const events = [
   'click',
@@ -74,12 +75,12 @@ export default {
 
     const marker = this.$marker = L.marker(this.position, options);
 
-    this.$nextTick(function () {
+    bus.$on('loaded', (id) => {
       this.addLayer(marker);
       events.forEach((event) => {
         marker.on({ event, func: (ev) => { this.$emit(event, ev) } })
       })
-    });
+    })
   },
 
   methods: {

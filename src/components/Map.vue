@@ -6,6 +6,7 @@
 
 <script>
 
+import bus from '@/bus'
 import { mapMutations } from 'vuex';
 
 const events = [
@@ -97,15 +98,21 @@ export default {
       zoomControl: this.zoomControl,
     };
 
-    this.mapReady({ name: this.id, options: options });
+    this.addMap({ name: this.id, options: options });
     events.forEach((event, index) => {
       this.addEvent({ event, func: (ev) => { this.$emit(event, ev) } })
-    })
+    });
+    bus.$emit('loaded', this.id);
+  },
+
+  destroyed() {
+    this.removeMap({ name: this.id });
   },
 
   methods: {
     ...mapMutations([
-      'mapReady',
+      'addMap',
+      'removeMap',
       'addEvent',
       'locate',
     ]),

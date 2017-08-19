@@ -4,6 +4,7 @@
 
 <script>
 
+import bus from '@/bus'
 import { mapMutations } from 'vuex';
 import L from 'leaflet';
 
@@ -34,7 +35,7 @@ export default {
         .setLatLng(this.latlng)
         .setContent(this.content);
 
-      this.$nextTick(function () {
+      bus.$on('loaded', () => {
         this.openPopup(popup)
         events.forEach((event) => {
           popup.on({ event, func: (ev) => { this.$emit(event, ev) } })

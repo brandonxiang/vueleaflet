@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import bus from '@/bus'
 import { mapGetters } from 'vuex';
 import L from 'leaflet';
 
@@ -12,7 +13,7 @@ const events = [
   'popupopen',
   'popupclose',
   'tooltipopen',
-  'tooltipclose'
+  'tooltipclose',
 ];
 
 
@@ -27,7 +28,7 @@ export default {
   },
 
   mounted() {
-    this.$nextTick(function () {
+    bus.$on('loaded',  () => {
       this.$parent.$marker.bindTooltip(this.content).openTooltip();
       // events.forEach((event) => {
       //   popup.on({ event, func: (ev) => { this.$emit(event, ev) } })

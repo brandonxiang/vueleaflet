@@ -3,9 +3,9 @@
   <l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom" 
     :attributionControl="attributionControl" :zoomend="zoomend">
     <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
-    <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
+     <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
       <l-tooltip content="a tooltip"></l-tooltip>
-    </l-marker>
+    </l-marker> 
     <l-marker :position="marker" :title="title" :opacity="opacity" :draggable="false">
       <l-popup content="a popup"></l-popup>
     </l-marker>

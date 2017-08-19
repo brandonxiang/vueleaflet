@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import bus from '@/bus'
 import { mapMutations } from 'vuex';
 import L from 'leaflet';
 
@@ -20,7 +21,7 @@ export default {
   mounted() {
     const tilelayer = L.tileLayer(this.url, { attribution: this.attribution });
 
-    this.$nextTick(function () {
+    bus.$on('loaded',  () => {
       this.addLayer(tilelayer);
     });
   },

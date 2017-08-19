@@ -1,18 +1,18 @@
-import module from './vuex';
-import LMap from './components/Map.vue';
-import LTilelayer from './components/TileLayer.vue';
-import LMarker from './components/Marker.vue';
-import LPopup from './components/Popup.vue';
-import LTooltip from './components/Tooltip.vue';
+import module from './store';
+import LMap from './components/Map';
+import LTilelayer from './components/TileLayer';
+import LMarker from './components/Marker';
+import LPopup from './components/Popup';
+import LTooltip from './components/Tooltip';
 
-let plugin = {};
+const plugin = {};
 
-plugin.install = function(Vue, store, moduleName = 'VL'){
+plugin.install = function (Vue, store, moduleName = 'VL') {
   // if(this.installed) return
-  
-  store.registerModule(moduleName, module)
 
-  if(store.state.hasOwnProperty(moduleName)===false){
+  store.registerModule(moduleName, module);
+
+  if (store.state.hasOwnProperty(moduleName) === false) {
     console.error('vue-leaflet module is not correctly initialized. Please check the module name:', moduleName);
   }
 
@@ -21,7 +21,7 @@ plugin.install = function(Vue, store, moduleName = 'VL'){
   Vue.component('LMarker', LMarker);
   Vue.component('LPopup', LPopup);
   Vue.component('LTooltip', LTooltip);
-}
+};
 
 export default {
   module,
@@ -31,4 +31,4 @@ export default {
   LMarker,
   LPopup,
   LTooltip,
-}
+};
