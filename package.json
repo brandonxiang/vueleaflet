@@ -1,6 +1,6 @@
 {
   "name": "vueleaflet",
-  "version": "2.0.12",
+  "version": "2.1.1",
   "description": "A vue component for leaflet.js",
   "author": "brandonxiang <1542453460@qq.com>",
   "main": "dist/vueleaflet.min.js",
@@ -12,8 +12,8 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs",
     "build-minijs": "cross-env NODE_ENV=production webpack --hide-modules --colors --progress --config build/webpack.bundle.config.js --display-error-details",
     "build-js": "cross-env NODE_ENV=development webpack --hide-modules --colors --progress --config build/webpack.bundle.config.js --display-error-details",
-    "release":"nrm use npm && npm publish && nrm use taobao",
-    "fix":"npm run build && npm run build-js && npm run release"
+    "release": "nrm use npm && npm publish && nrm use taobao",
+    "fix": "npm run build && npm run build-js && npm run release"
   },
   "dependencies": {
     "leaflet": "^1.0.3",

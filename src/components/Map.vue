@@ -6,8 +6,9 @@
 
 <script>
 
-import bus from '@/bus'
+
 import { mapMutations } from 'vuex';
+import bus from '../bus';
 
 const events = [
   'click',

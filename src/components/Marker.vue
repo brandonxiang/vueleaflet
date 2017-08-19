@@ -7,7 +7,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import L from 'leaflet';
-import bus from '@/bus'
+import bus from '../bus'
 
 const events = [
   'click',

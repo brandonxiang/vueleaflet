@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import bus from '@/bus'
+import bus from '../bus'
 import { mapGetters } from 'vuex';
 import L from 'leaflet';
 
