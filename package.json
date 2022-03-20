@@ -1,0 +1,30 @@
+{
+  "name": "vueleaflet",
+  "version": "0.0.0",
+  "files": ["dist"],
+  "main": "./dist/vueleaflet.umd.js",
+  "module": "./dist/vueleaflet.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vueleaflet.es.js",
+      "require": "./dist/vueleaflet.umd.js"
+    }
+  },
+  "scripts": {
+    "example": "vite dev --config vite.example.config.ts",
+    "build": "vite build",
+    "dev": "vite dev"
+  },
+  "dependencies": {
+    "vue": "^3.2.25",
+    "leaflet": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "@types/leaflet": "^1.7.9",
+    "@vitejs/plugin-vue": "^2.2.0",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0",
+    "vue-tsc": "^0.29.8"
+  }
+}
