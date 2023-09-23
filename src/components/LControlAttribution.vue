@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import L, { CircleOptions, LatLngExpression } from 'leaflet'
+import L from 'leaflet'
 import { PropType, inject, nextTick } from 'vue';
 import { MapProvide } from '../core/Map';
 import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
@@ -10,23 +10,17 @@ const mapProvide = inject<MapProvide>(MAP_PROVIDE);
 const key = getMapInjectKey();
 
 const props = defineProps({
-  latlng: {
-    type: Object as PropType<LatLngExpression>,
-    required: true
-  },
   options: {
-    type: Object as PropType<CircleOptions>,
+    type: Object as PropType<L.Control.AttributionOptions>,
     required: false
   }
 })
 
-
-
 nextTick(() => {
-  const circle = L.circle(props.latlng, props.options);
-  mapProvide?.getMap(key)?.addLayer(circle);
+  const attribution = L.control.attribution(props.options);
+  mapProvide?.getMap(key)?.addControl(attribution);
 })
 
-</script>  
+</script>
 
 <template></template>

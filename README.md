@@ -14,7 +14,6 @@
         <img src="https://img.shields.io/twitter/follow/xwpisme?style=social&logo=twitter"
             alt="follow on Twitter">
     </a>
-    
 </p>
 
 Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](https://github.com/PaulLeCam/react-leaflet) and [vue-google-maps](https://github.com/GuillaumeLeclerc/vue-google-maps).

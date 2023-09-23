@@ -10,16 +10,21 @@ import {
   LPolygon,
   LPolyline,
   LRectangle,
+  LControlAttribution,
+  LControlLayers,
+  LControlZoom,
+  LControlScale
 } from '../src';
 import '../node_modules/leaflet/dist/leaflet.css';
+import L from 'leaflet';
 
 const mapOptions = {
   zoom: 13,
   center: { lat: 51.505, lng: -0.09 },
   minZoom: 8,
   maxZoom: 15,
-  attributionControl: true,
-  zoomControl: true
+  attributionControl: false,
+  zoomControl: false
 }
 
 const tileLayerOptions = {
@@ -31,11 +36,28 @@ const tileLayerOptions = {
   accessToken: 'pk.eyJ1IjoieHdwaXNtZSIsImEiOiJ5cTlCQTlRIn0.QdV-wNUKbgs7jAlbVE747Q'
 }
 
+const baseLayerOptions = {
+  geoqBlue: new L.TileLayer(
+    "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+    {
+      attribution: "geoq blue"
+    }
+  ),
+  '高德影像': new L.TileLayer(
+    "http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+    {
+      subdomains: "1234",
+      attribution: "高德影像"
+    }
+  )
+}
+
+
 </script>
 
 <template>
   <div>
-    <h1>Marker/Tooltip/Popup</h1>
+    <h1>Basic UI Layers</h1>
     <l-map id="map1" :options="mapOptions">
       <l-tilelayer urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
         :options="tileLayerOptions" />
@@ -59,7 +81,7 @@ const tileLayerOptions = {
     <h1>Vector Layers</h1>
     <l-map id="map2" :options="mapOptions">
       <l-tilelayer urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
-        :options="tileLayerOptions"/>
+        :options="tileLayerOptions" />
       <l-circle :latlng="[51.508, -0.11]" :options="{
         color: 'red',
         fillColor: '#f03',
@@ -90,14 +112,17 @@ const tileLayerOptions = {
   </div>
   <div>
     <h1>Control</h1>
-    <l-map id="map3" :options="mapOptions">
+    <l-map id="map3" :options="{
+      ...mapOptions, 
+      zoom: 10,
+      center: { lat: 26.33280692289788, lng: 114.78515624999999 },
+      }">
       <l-tilelayer urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
         :options="tileLayerOptions" />
-      <!-- <l-marker id="marker3" :latlng="{ lat: 51.505, lng: -0.2 }" :options="{
-        title: 'marker3'
-      }">
-        <l-popup :options="{ content: 'popup with marker3' }" />
-      </l-marker> -->
+      <LControlScale />
+      <LControlZoom :options="{ position: 'topright' }" />
+      <LControlAttribution />
+      <LControlLayers :base-layers="baseLayerOptions" />
     </l-map>
   </div>
 </template>
