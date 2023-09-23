@@ -1,11 +1,12 @@
 <script setup lang="ts">
 
-import L, { LatLngExpression } from 'leaflet';
-import { inject, nextTick, onMounted, ref, useAttrs, useSlots } from 'vue';
-import { MapProvide } from '../core/Map';
+import L, { type LatLngExpression, type MarkerOptions } from 'leaflet';
+import { type PropType, inject, nextTick, onMounted, provide, ref, useAttrs, useSlots } from 'vue';
+import { type MapProvide } from '../core/Map';
 import defaultIcon from 'leaflet/dist/images/marker-icon.png'
 import defaultIconShadow from 'leaflet/dist/images/marker-shadow.png';
 import defaultIconRetina from 'leaflet/dist/images/marker-icon-2x.png';
+import { markerProvide } from '../core/Marker';
 
 const events = [
   'click',
@@ -26,50 +27,43 @@ const events = [
   'tooltipclose'
 ];
 
-interface Props {
-    position: LatLngExpression;
-    icon?: string;
-    iconShadow?: string;
-    iconRetina?: string;
-    draggable: boolean;
-    visible?: boolean;
-    opacity: number;
-    title: string;
-}
 
-const props = defineProps< Props >();
-const mapProvide = inject<MapProvide>('mapid');
+const props = defineProps({
+  latlng: {
+    type: Object as PropType<LatLngExpression>,
+    required: true,
+  },
+  options: {
+    type: Object as PropType<MarkerOptions>,
+    required: false
+  }
+});
+const mapProvide = inject<MapProvide>('mapProvide');
 
-const options = {
-    draggable: props.draggable,
-    opacity: props.opacity,
-    title: props.title,
-};
+provide('markerProvide', markerProvide)
 
-
-const overlayer = ref('hello tooltip');
 
 nextTick(() => {
-    console.log(props);
-    fixImageUrl();
-    const marker = L.marker(props.position, options);
-    console.log(33333, marker);
-    mapProvide?.addLayer(marker);
-    // overlayer.value = marker;
+  fixImageUrl();
+  const marker = L.marker(props.latlng, props.options);
+  markerProvide.setMarker(marker);
+  mapProvide?.getMap()?.addLayer(marker);
+
 })
 
 function fixImageUrl() {
-      //https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-261904061
-      //@ts-ignore
-      delete L.Icon.Default.prototype._getIconUrl;
-      L.Icon.Default.mergeOptions({
-        iconRetinaUrl: props.iconRetina || defaultIconRetina,
-        iconUrl: props.icon || defaultIcon,
-        shadowUrl: props.iconShadow || defaultIconShadow,
-      });
+  //https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-261904061
+  // TODO: L.Icon
+  //@ts-ignore
+  delete L.Icon.Default.prototype._getIconUrl;
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: defaultIconRetina,
+    iconUrl: defaultIcon,
+    shadowUrl: defaultIconShadow,
+  });
 }
 </script>
 
 <template>
-    <slot overlayer="hello slot"></slot>
+    <slot></slot>
 </template>

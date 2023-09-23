@@ -1,11 +1,92 @@
-# Vue 3 + Typescript + Vite
+# vue-leaflet
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](https://github.com/PaulLeCam/react-leaflet) and [vue-google-maps](https://github.com/GuillaumeLeclerc/vue-google-maps).
 
-## Recommended IDE Setup
+> A vue component for leaflet.js
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+This branch adapts with vue 3.0, and leaflet 1.9.x.
 
-## Type Support For `.vue` Imports in TS
+## Completion of components
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+-   [x] Map
+-   [x] Marker
+-   [x] Popup
+-   [x] Tooltip
+-   [x] TileLayer
+
+## Installation
+
+```
+npm install vueleaflet -save
+```
+
+## Startup
+
+You can input some Vue-styled components in a .vue file in order to use leaflet.js, like [Layout.vue](src/Layout.vue).
+
+```
+<l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
+  <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
+  <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
+    <l-tooltip content="a tooltip"></l-tooltip>
+  </l-marker>
+  <l-marker :position="marker" :title="title" :opacity="opacity" :draggable="false">
+    <l-popup content="a popup"></l-popup>
+  </l-marker>
+</l-map>
+```
+
+Before that, you should config the vuex, see [main.js](src/main.js)
+
+```
+import Vue from 'vue';
+import Vuex from 'vuex';
+import VueLeaflet from './index'
+import App from './Layout';
+
+Vue.use(Vuex);
+
+const store = new Vuex.Store({});
+
+Vue.use(VueLeaflet.plugin,store);
+
+new Vue({
+  el: '#app',
+  store,
+  template: '<App/>',
+  components: { App },
+});
+
+```
+
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run all tests
+npm test
+```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Contribute
+
+All the developments are on the [develop](https://github.com/brandonxiang/vue-leaflet/tree/next) branch, while the stable version is on the [master](https://github.com/brandonxiang/vue-leaflet/tree/next) branch.
+
+## License
+
+[MIT](LICENSE)

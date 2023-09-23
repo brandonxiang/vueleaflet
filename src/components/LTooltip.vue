@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import L from 'leaflet';
+import L, { LatLng, LatLngExpression, type TooltipOptions } from 'leaflet';
 
-import { getCurrentInstance, nextTick, useAttrs, useSlots } from "vue";
+import { type PropType, onMounted, nextTick, useAttrs, useSlots, inject } from "vue";
+import { type MarkerProvide } from '../core/Marker';
+import { type MapProvide } from '../core/Map';
 
 const events = [
   'add',
@@ -12,19 +14,34 @@ const events = [
   'tooltipclose',
 ];
 
+const mapProvide = inject<MapProvide>('mapProvide');
+const markerProvide = inject<MarkerProvide>('markerProvide');
 
-interface Props {
-    content: string;
-}
 
-// nextTick(()=> {
-//     instance?.parent.
-// }) 
+const props = defineProps({
+  latlng: {
+    type: Object as PropType<LatLngExpression>,
+    required: false
+  },
+  options: {
+        type: Object as PropType<TooltipOptions>,
+        required: false
+    }
+})
 
-const slot = useSlots();
-const attr = useAttrs();
 
-L.tooltip({pane: 'hello'}, )
-console.log(55555, slot, attr);
+nextTick(() => {
+  const tooltip = L.tooltip(props.options)
+  if(props.latlng) {
+    tooltip.setLatLng(props.latlng);
+    mapProvide?.getMap()?.addLayer(tooltip);
+  } else {
+    markerProvide?.getMarker()?.bindTooltip(tooltip);
+  }
+
+})
 
 </script>
+
+<template>
+</template>

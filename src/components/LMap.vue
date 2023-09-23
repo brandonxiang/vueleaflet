@@ -1,41 +1,33 @@
 <script setup lang="ts">
-import { onMounted} from 'vue'
-import { LatLngExpression } from 'leaflet';
+import { PropType, onMounted } from 'vue'
+import { MapOptions } from 'leaflet';
 import { provide } from 'vue'
 import L from 'leaflet';
-import { mapProvide, addMap, map } from '../core/Map';
+import { mapProvide } from '../core/Map';
 
-// not support. reference to https://github.com/vuejs/core/issues/4294
-// interface Props extends MapOptions {}
 
-interface Props {
-   center?: LatLngExpression | undefined;
-   zoom?: number | undefined;
-   minZoom?: number;
-   maxZoom?: number;
-   attributionControl?: boolean;
-   zoomControl?: boolean; 
-}
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
+  },
+  options: {
+    type: Object as PropType<MapOptions>,
+    required: false
+  }
+});
 
-const props = defineProps< Props >();
-
-provide('mapid', mapProvide)
+provide('mapProvide', mapProvide)
 
 onMounted(() => {
-  const content  = L.map('mapid', props);
-  addMap(content);
-  console.log('1111111', content);
-  console.log('222222', map.value);
+  const content  = L.map(props.id, props.options);
+  mapProvide.setMap(content);
 })
 
 </script>
 
 <template>
-  <div id="mapid">
+  <div :id="props.id">
     <slot></slot>
   </div>
 </template>
-
-<style scoped>
-
-</style>
