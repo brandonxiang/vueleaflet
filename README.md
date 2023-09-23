@@ -1,91 +1,123 @@
 # vue-leaflet
 
+<p align="center">
+    <a href="https://github.com/brandonxiang/vueleaflet/blob/master/LICENSE">
+      <img src="https://img.shields.io/github/license/brandonxiang/vueleaflet" alt="license">
+    </a>
+    <a href="https://npmjs.org/package/vueleaflet" alt="npm version">
+        <img src="https://img.shields.io/npm/v/vueleaflet.svg" />
+    </a>
+        <a href="https://npmjs.org/package/vueleaflet" alt="npm version">
+        <img src="https://img.shields.io/npm/dw/vueleaflet" />
+    </a>
+    <a href="https://twitter.com/intent/follow?screen_name=xwpisme">
+        <img src="https://img.shields.io/twitter/follow/xwpisme?style=social&logo=twitter"
+            alt="follow on Twitter">
+    </a>
+    
+</p>
+
 Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](https://github.com/PaulLeCam/react-leaflet) and [vue-google-maps](https://github.com/GuillaumeLeclerc/vue-google-maps).
 
 > A vue component for leaflet.js
 
-This branch adapts with vue 3.0, and leaflet 1.9.x.
-
-## Completion of components
-
--   [x] Map
--   [x] Marker
--   [x] Popup
--   [x] Tooltip
--   [x] TileLayer
+This library is compatible with vue 3.0, and leaflet 1.9.x.
 
 ## Installation
 
-```
-npm install vueleaflet -save
+```bash
+npm install vueleaflet vue leaflet -save
 ```
 
 ## Startup
 
 You can input some Vue-styled components in a .vue file in order to use leaflet.js, like [Layout.vue](src/Layout.vue).
 
-```
-<l-map :zoom="zoom" :center="center" :min-zoom="minZoom" :max-zoom="maxZoom">
-  <l-tilelayer :url="url" :attribution="attribution"></l-tilelayer>
-  <l-marker :position="center" :title="title" :opacity="opacity" :draggable="draggable">
-    <l-tooltip content="a tooltip"></l-tooltip>
+```html
+<l-map
+  id="map1"
+  :options="{
+    zoom: 13,
+    center: { lat: 51.505, lng: -0.09 },
+    minZoom: 8,
+    maxZoom: 15,
+    attributionControl: true,
+    zoomControl: true
+  }"
+>
+  <l-tilelayer
+    urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
+    :options="{
+        attribution: 'vue-leaflet',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoieHdwaXNtZSIsImEiOiJ5cTlCQTlRIn0.QdV-wNUKbgs7jAlbVE747Q'
+      }"
+  />
+  <l-marker
+    :latlng="{ lat: 51.505, lng: -0.09 }"
+    :options="{
+      title: 'marker1',
+      opacity: 1,
+      draggable: true
+    }"
+  >
+    <l-tooltip :options="{ content: 'tooltip with marker1' }" />
   </l-marker>
-  <l-marker :position="marker" :title="title" :opacity="opacity" :draggable="false">
-    <l-popup content="a popup"></l-popup>
+  <l-marker
+    :latlng="{ lat: 51.505, lng: -0.11 }"
+    :options="{
+      title: 'marker2'
+    }"
+  >
+    <l-popup :options="{ content: 'popup with marker2' }" />
   </l-marker>
+  <l-tooltip
+    :options="{ content: 'tooltip standalone' }"
+    :latlng="{ lat: 51.505, lng: 0 }"
+  />
+  <l-popup
+    :options="{ content: 'popup standalone' }"
+    :latlng="{ lat: 51.505, lng: 0 }"
+  />
+  <l-circle
+    :latlng="[51.508, -0.11]"
+    :options="{
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 500
+    }"
+  />
+  <l-polygon
+    :latlng="[
+      [51.509, -0.08],
+      [51.503, -0.06],
+      [51.51, -0.047]
+    ]"
+  />
 </l-map>
-```
-
-Before that, you should config the vuex, see [main.js](src/main.js)
-
-```
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VueLeaflet from './index'
-import App from './Layout';
-
-Vue.use(Vuex);
-
-const store = new Vuex.Store({});
-
-Vue.use(VueLeaflet.plugin,store);
-
-new Vue({
-  el: '#app',
-  store,
-  template: '<App/>',
-  components: { App },
-});
-
 ```
 
 ## Build Setup
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
+```bash
+# serve the example
 npm run dev
 
-# build for production with minification
+# build the library
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# build the example
+npm run build: example
 
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Contribute
 
-All the developments are on the [develop](https://github.com/brandonxiang/vue-leaflet/tree/next) branch, while the stable version is on the [master](https://github.com/brandonxiang/vue-leaflet/tree/next) branch.
+PR Welcome
 
 ## License
 
