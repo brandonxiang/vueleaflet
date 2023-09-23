@@ -11,21 +11,22 @@ const key = getMapInjectKey();
 
 const props = defineProps({
   latlngs: {
-    type: Object as PropType<LatLngExpression[] | LatLngExpression[][] | LatLngExpression[][][]>,
+    type: Object as PropType<LatLngExpression[] | LatLngExpression[][]>,
     required: true
   },
   options: {
-    type: Object as PropType<PolylineOptions>,
-    required: false
-  }
+        type: Object as PropType<PolylineOptions>,
+        required: false
+    }
 })
 
 nextTick(() => {
-  const polygon = L.polygon(props.latlngs, props.options);
+  const polygon = L.polyline(props.latlngs, props.options);
 
   mapProvide?.getMap(key)?.addLayer(polygon);
 })
 
 </script>  
 
-<template></template>
+<template>
+</template>

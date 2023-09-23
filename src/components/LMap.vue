@@ -4,6 +4,7 @@ import { MapOptions } from 'leaflet';
 import { provide } from 'vue'
 import L from 'leaflet';
 import { mapProvide } from '../core/Map';
+import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
 
 
 const props = defineProps({
@@ -17,11 +18,19 @@ const props = defineProps({
   }
 });
 
-provide('mapProvide', mapProvide)
+provide(MAP_PROVIDE, mapProvide)
+
+const key = getMapInjectKey(props.id);
 
 onMounted(() => {
+  console.log(props.id);
   const content  = L.map(props.id, props.options);
-  mapProvide.setMap(content);
+  mapProvide.setMap(key, content);
+})
+
+defineExpose({
+  id: props.id,
+  category: 'map'
 })
 
 </script>

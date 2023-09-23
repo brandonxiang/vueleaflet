@@ -4,6 +4,7 @@ import L, { LatLng, LatLngExpression, type TooltipOptions } from 'leaflet';
 import { type PropType, onMounted, nextTick, useAttrs, useSlots, inject } from "vue";
 import { type MarkerProvide } from '../core/Marker';
 import { type MapProvide } from '../core/Map';
+import { MAP_PROVIDE, MARK_PROVIDE, getMapInjectKey, getMarkerInjectKey } from '../utils/injectKey';
 
 const events = [
   'add',
@@ -14,9 +15,12 @@ const events = [
   'tooltipclose',
 ];
 
-const mapProvide = inject<MapProvide>('mapProvide');
-const markerProvide = inject<MarkerProvide>('markerProvide');
 
+const mapProvide = inject<MapProvide>(MAP_PROVIDE);
+const markerProvide = inject<MarkerProvide>(MARK_PROVIDE);
+
+const mapKey = getMapInjectKey();
+const markerKey = getMarkerInjectKey();
 
 const props = defineProps({
   latlng: {
@@ -34,9 +38,9 @@ nextTick(() => {
   const tooltip = L.tooltip(props.options)
   if(props.latlng) {
     tooltip.setLatLng(props.latlng);
-    mapProvide?.getMap()?.addLayer(tooltip);
+    mapProvide?.getMap(mapKey)?.addLayer(tooltip);
   } else {
-    markerProvide?.getMarker()?.bindTooltip(tooltip);
+    markerProvide?.getMarker(markerKey)?.bindTooltip(tooltip);
   }
 
 })

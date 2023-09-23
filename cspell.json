@@ -4,6 +4,8 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
+        "latlng",
+        "latlngs",
         "Tilelayer"
     ],
     "ignoreWords": [],

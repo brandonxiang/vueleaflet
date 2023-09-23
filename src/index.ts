@@ -4,4 +4,7 @@ export { default as LTooltip } from './components/LTooltip.vue';
 export { default as LTilelayer} from './components/LTilelayer.vue';
 export { default as LPopup } from './components/LPopup.vue'; 
 export { default as LCircle } from './components/LCircle.vue';
+export { default as LCircleMarker } from './components/LCircleMarker.vue';
 export { default as LPolygon } from './components/LPolygon.vue'; 
+export { default as LPolyline } from './components/LPolyline.vue';
+export { default as LRectangle } from './components/LRectangle.vue';

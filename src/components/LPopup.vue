@@ -3,9 +3,15 @@ import L, { LatLngExpression, PopupOptions } from 'leaflet'
 import { PropType, inject, nextTick } from 'vue';
 import { MarkerProvide } from '../core/Marker';
 import { MapProvide } from '../core/Map';
+import { MAP_PROVIDE, MARK_PROVIDE, getMapInjectKey, getMarkerInjectKey } from '../utils/injectKey';
 
-const mapProvide = inject<MapProvide>('mapProvide');
-const markerProvide = inject<MarkerProvide>('markerProvide');
+
+
+const mapProvide = inject<MapProvide>(MAP_PROVIDE);
+const markerProvide = inject<MarkerProvide>(MARK_PROVIDE);
+
+const mapKey = getMapInjectKey();
+const markerKey = getMarkerInjectKey()
 
 
 const props = defineProps({
@@ -23,9 +29,9 @@ nextTick(() => {
   const popup = L.popup(props.options);
   if(props.latlng) {
     popup.setLatLng(props.latlng);
-    mapProvide?.getMap()?.addLayer(popup);
+    mapProvide?.getMap(mapKey)?.addLayer(popup);
   } else {
-    markerProvide?.getMarker()?.bindPopup(popup);
+    markerProvide?.getMarker(markerKey)?.bindPopup(popup);
   }
 
 });

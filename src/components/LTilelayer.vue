@@ -3,6 +3,7 @@
 import L, { type TileLayerOptions } from 'leaflet';
 import { type PropType, inject, nextTick } from 'vue'
 import type { MapProvide } from '../core/Map';
+import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
 
 
 
@@ -16,15 +17,21 @@ const props = defineProps({
         required: false
     }
 });
-const mapProvide = inject<MapProvide>('mapProvide');
 
+const mapProvide = inject<MapProvide>(MAP_PROVIDE);
+
+const key = getMapInjectKey()
 
 nextTick(() => {
     const tilelayer = L.tileLayer(props.urlTemplate, props.options)
-    mapProvide?.getMap()?.addLayer(tilelayer);
+    const map = mapProvide?.getMap(key);
+    map?.addLayer(tilelayer);
 })
+
+
+
+
 
 </script>
 
-<template>
-</template>
+<template></template>
