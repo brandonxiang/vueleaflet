@@ -1,0 +1,37 @@
+name: github-pages
+
+on: push
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: '18.x'
+
+      - name: Cache .pnpm-store
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}
+
+      - name: install pnpm and npm
+        run: |
+          curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@dev npm@6
+      - name: pnpm install
+        run: pnpm install
+      - name: build pages
+        run: pnpm run build:example
+
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          cname: vueleaflet.brandonxiang.top

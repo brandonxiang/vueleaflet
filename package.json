@@ -12,9 +12,9 @@
     }
   },
   "scripts": {
-    "example": "vite dev --config vite.example.config.ts",
-    "build": "vite build",
-    "dev": "vite dev"
+    "dev": "vite dev --config vite.example.config.ts",
+    "build:example": "vite build --config vite.example.config.ts",
+    "build": "vite build"
   },
   "dependencies": {
     "vue": "^3.3.4",

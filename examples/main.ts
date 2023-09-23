@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import App from '../dist/vueleaflet.es';
-import '../dist/style.css';
+import App from './Layout.vue';
 
 createApp(App).mount('#app')

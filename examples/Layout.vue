@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import LMap from './components/LMap.vue';
-import LTilelayer from './components/LTilelayer.vue';
-import LMarker from './components/LMarker.vue';
-import LTooltip from './components/LTooltip.vue';
-import LPopup from './components/LPopup.vue';
-import LCircle from './components/LCircle.vue';
-import LPolygon from './components/LPolygon.vue';
+import {
+  LMap,
+  LTilelayer,
+  LMarker,
+  LTooltip,
+  LPopup,
+  LCircle,
+  LPolygon
+} from '../src';
 import '../node_modules/leaflet/dist/leaflet.css';
 
 </script>
