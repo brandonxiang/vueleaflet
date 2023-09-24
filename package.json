@@ -1,8 +1,10 @@
 {
   "name": "vueleaflet",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vueleaflet.umd.js",
   "module": "./dist/vueleaflet.es.js",
   "types": "./dist/index.d.ts",
