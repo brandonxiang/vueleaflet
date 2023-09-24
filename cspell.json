@@ -6,7 +6,8 @@
     "words": [
         "latlng",
         "latlngs",
-        "Tilelayer"
+        "Tilelayer",
+        "vueleaflet"
     ],
     "ignoreWords": [],
     "import": []

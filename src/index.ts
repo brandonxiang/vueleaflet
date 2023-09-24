@@ -12,4 +12,5 @@ export { default as LControlAttribution } from './components/LControlAttribution
 export { default as LControlLayers } from './components/LControlLayers.vue';
 export { default as LControlScale } from './components/LControlScale.vue';
 export { default as LControlZoom } from './components/LControlZoom.vue';
+export { default as LGeojson } from './components/LGeojson.vue';
 
