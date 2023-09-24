@@ -18,7 +18,7 @@ import {
 } from "../src";
 import "../node_modules/leaflet/dist/leaflet.css";
 import L from "leaflet";
-// import { type GeoJsonObject } from 'geojson';
+import LCustomPlugin from './LCustomPlugin.vue';
 
 const mapOptions = {
   zoom: 13,
@@ -69,12 +69,14 @@ const tmpGeojson = {
        }
    };
 
+
+
 </script>
 
 <template>
   <div>
     <h1>Basic UI Layers</h1>
-    <l-map id="map1" :options="mapOptions">
+    <l-map id="map1" :options="mapOptions" ref="map1">
       <l-tilelayer
         urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
         :options="tileLayerOptions"
@@ -189,6 +191,19 @@ const tmpGeojson = {
       <LGeojson :geojson="tmpGeojson" />
     </l-map>
   </div>
+  <div>
+    <h1>Custom Plugin</h1>
+    <l-map
+      id="map5"
+      :options="mapOptions"
+    >
+      <l-tilelayer
+        urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
+        :options="tileLayerOptions"
+      />
+      <LCustomPlugin />
+    </l-map>
+  </div>
 </template>
 
 <style lang="css">
@@ -200,7 +215,8 @@ const tmpGeojson = {
 #map1,
 #map2,
 #map3,
-#map4 {
+#map4,
+#map5 {
   height: 300px;
 }
 
