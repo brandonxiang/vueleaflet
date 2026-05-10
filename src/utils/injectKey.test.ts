@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { getMapInjectKey, getMarkerInjectKey, MAP_PROVIDE, MARK_PROVIDE } from './injectKey';
+import {
+  getMapInjectKey,
+  getMarkerInjectKey,
+  MAP_PROVIDE,
+  MARK_PROVIDE,
+} from './injectKey';
 
 describe('inject keys', () => {
   it('exports stable provide keys', () => {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import L, { GeoJSONOptions } from 'leaflet'
+import L, { GeoJSONOptions } from 'leaflet';
 import type { GeoJsonObject } from 'geojson';
 import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
@@ -10,18 +10,21 @@ const attrs = useAttrs();
 const props = defineProps({
   geojson: {
     type: Object as PropType<GeoJsonObject>,
-    required: true
+    required: true,
   },
   options: {
     type: Object as PropType<GeoJSONOptions>,
-    required: false
-  }
-})
-
-const geojsonRef = useLeafletLayer(() => L.geoJSON(props.geojson, props.options), {
-  attrs,
-  events: layerEvents,
+    required: false,
+  },
 });
+
+const geojsonRef = useLeafletLayer(
+  () => L.geoJSON(props.geojson, props.options),
+  {
+    attrs,
+    events: layerEvents,
+  }
+);
 
 watch(
   () => props.geojson,
@@ -31,7 +34,6 @@ watch(
   },
   { deep: true }
 );
-
-</script>  
+</script>
 
 <template></template>

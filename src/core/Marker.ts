@@ -1,27 +1,23 @@
-
-
 import type { Marker, Layer, Popup, Tooltip, Control } from 'leaflet';
 import { ref } from 'vue';
-
 
 const marker = ref<Record<string, Marker>>({});
 
 const getMarker = (key: string) => {
-  if(marker.value[key]) {
+  if (marker.value[key]) {
     return marker.value[key];
   }
   return null;
-}
+};
 
 const setMarker = (key: string, content: Marker) => {
-  marker.value[key] = content
-}
-
+  marker.value[key] = content;
+};
 
 export const markerProvide = {
-  marker, 
+  marker,
   getMarker,
-  setMarker  
-}
+  setMarker,
+};
 
-export type MarkerProvide = typeof markerProvide
+export type MarkerProvide = typeof markerProvide;

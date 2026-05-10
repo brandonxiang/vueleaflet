@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import L, { type LatLngBoundsExpression, type VideoOverlayOptions } from 'leaflet';
+import L, {
+  type LatLngBoundsExpression,
+  type VideoOverlayOptions,
+} from 'leaflet';
 import { type PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
 import { toLatLngBounds } from '../utils/bounds';
@@ -22,10 +25,13 @@ const props = defineProps({
   },
 });
 
-const videoOverlayRef = useLeafletLayer(() => L.videoOverlay(props.url, props.bounds, props.options), {
-  attrs,
-  events: layerEvents,
-});
+const videoOverlayRef = useLeafletLayer(
+  () => L.videoOverlay(props.url, props.bounds, props.options),
+  {
+    attrs,
+    events: layerEvents,
+  }
+);
 
 watch(
   () => props.bounds,

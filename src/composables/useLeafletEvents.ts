@@ -33,7 +33,9 @@ export const bindLeafletEventsFromAttrs = (
   attrs: Attrs,
   eventNames: string[]
 ) => {
-  const events = eventNames.reduce<Record<string, LeafletEventHandler | undefined>>((result, eventName) => {
+  const events = eventNames.reduce<
+    Record<string, LeafletEventHandler | undefined>
+  >((result, eventName) => {
     const listener = attrs[toVueListenerName(eventName)];
 
     if (typeof listener === 'function') {

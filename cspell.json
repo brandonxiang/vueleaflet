@@ -1,14 +1,9 @@
 {
-    "version": "0.2",
-    "ignorePaths": [],
-    "dictionaryDefinitions": [],
-    "dictionaries": [],
-    "words": [
-        "latlng",
-        "latlngs",
-        "Tilelayer",
-        "vueleaflet"
-    ],
-    "ignoreWords": [],
-    "import": []
+  "version": "0.2",
+  "ignorePaths": [],
+  "dictionaryDefinitions": [],
+  "dictionaries": [],
+  "words": ["latlng", "latlngs", "Tilelayer", "vueleaflet"],
+  "ignoreWords": [],
+  "import": []
 }

@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { type CSSProperties, inject, nextTick, onBeforeUnmount, watch, type PropType } from 'vue';
+import {
+  type CSSProperties,
+  inject,
+  nextTick,
+  onBeforeUnmount,
+  watch,
+  type PropType,
+} from 'vue';
 import { type MapProvide } from '../core/Map';
 import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
 

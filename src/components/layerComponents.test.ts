@@ -1,7 +1,10 @@
 import { mount } from '@vue/test-utils';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { nextTick } from 'vue';
-import { LEAFLET_LAYER_PROVIDER, type LeafletLayerProvider } from '../core/Layer';
+import {
+  LEAFLET_LAYER_PROVIDER,
+  type LeafletLayerProvider,
+} from '../core/Layer';
 import { MAP_PROVIDE } from '../utils/injectKey';
 import LLayerGroup from './LLayerGroup.vue';
 import LFeatureGroup from './LFeatureGroup.vue';

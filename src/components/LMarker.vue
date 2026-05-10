@@ -1,13 +1,23 @@
 <script setup lang="ts">
-
 import L, { type LatLngExpression, type MarkerOptions } from 'leaflet';
-import { type PropType, nextTick, onBeforeUnmount, provide, watch, inject, useAttrs } from 'vue';
-import defaultIcon from 'leaflet/dist/images/marker-icon.png'
+import {
+  type PropType,
+  nextTick,
+  onBeforeUnmount,
+  provide,
+  watch,
+  inject,
+  useAttrs,
+} from 'vue';
+import defaultIcon from 'leaflet/dist/images/marker-icon.png';
 import defaultIconShadow from 'leaflet/dist/images/marker-shadow.png';
 import defaultIconRetina from 'leaflet/dist/images/marker-icon-2x.png';
 import { markerProvide } from '../core/Marker';
 import { MARK_PROVIDE, getMarkerInjectKey } from '../utils/injectKey';
-import { LEAFLET_LAYER_PROVIDER, type LeafletLayerProvider } from '../core/Layer';
+import {
+  LEAFLET_LAYER_PROVIDER,
+  type LeafletLayerProvider,
+} from '../core/Layer';
 import { bindLeafletEventsFromAttrs } from '../composables/useLeafletEvents';
 import { markerEvents } from '../utils/events';
 import { updateMarkerOptions } from '../utils/layerOptions';
@@ -23,19 +33,20 @@ const props = defineProps({
   },
   options: {
     type: Object as PropType<MarkerOptions>,
-    required: false
-  }
+    required: false,
+  },
 });
-
 
 provide(MARK_PROVIDE, markerProvide);
 
 const markerKey = getMarkerInjectKey(props.id);
-const layerProvider = inject<LeafletLayerProvider | null>(LEAFLET_LAYER_PROVIDER, null);
+const layerProvider = inject<LeafletLayerProvider | null>(
+  LEAFLET_LAYER_PROVIDER,
+  null
+);
 const attrs = useAttrs();
 let marker: L.Marker | null = null;
 let unbindEvents: (() => void) | undefined;
-
 
 nextTick(() => {
   fixImageUrl();
@@ -44,7 +55,7 @@ nextTick(() => {
 
   markerProvide.setMarker(markerKey, marker);
   layerProvider?.addLayer(marker);
-})
+});
 
 watch(
   () => props.latlng,
@@ -71,8 +82,8 @@ onBeforeUnmount(() => {
 
 defineExpose({
   id: props.id,
-  category: 'marker'
-})
+  category: 'marker',
+});
 
 function fixImageUrl() {
   //https://github.com/PaulLeCam/react-leaflet/issues/255#issuecomment-261904061
@@ -88,5 +99,5 @@ function fixImageUrl() {
 </script>
 
 <template>
-    <slot></slot>
+  <slot></slot>
 </template>

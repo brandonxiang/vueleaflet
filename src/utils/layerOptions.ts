@@ -71,4 +71,3 @@ export const updateTileLayerOptions = (
     tileLayer.setZIndex(options.zIndex);
   }
 };
-

@@ -17,10 +17,13 @@ const props = defineProps({
   },
 });
 
-const wmsLayerRef = useLeafletLayer(() => L.tileLayer.wms(props.baseUrl, props.options), {
-  attrs,
-  events: layerEvents,
-});
+const wmsLayerRef = useLeafletLayer(
+  () => L.tileLayer.wms(props.baseUrl, props.options),
+  {
+    attrs,
+    events: layerEvents,
+  }
+);
 
 watch(
   () => props.baseUrl,

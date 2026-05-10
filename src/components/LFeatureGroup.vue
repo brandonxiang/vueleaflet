@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import L, { type FeatureGroup, type LayerOptions } from 'leaflet';
-import { type PropType, inject, nextTick, onBeforeUnmount, provide, shallowRef } from 'vue';
+import {
+  type PropType,
+  inject,
+  nextTick,
+  onBeforeUnmount,
+  provide,
+  shallowRef,
+} from 'vue';
 import {
   createLeafletLayerProvider,
   LEAFLET_LAYER_PROVIDER,
@@ -14,7 +21,10 @@ const props = defineProps({
   },
 });
 
-const parentProvider = inject<LeafletLayerProvider | null>(LEAFLET_LAYER_PROVIDER, null);
+const parentProvider = inject<LeafletLayerProvider | null>(
+  LEAFLET_LAYER_PROVIDER,
+  null
+);
 const featureGroupProvider = createLeafletLayerProvider(parentProvider);
 const featureGroupRef = shallowRef<FeatureGroup | null>(null);
 
@@ -38,4 +48,3 @@ onBeforeUnmount(() => {
 <template>
   <slot></slot>
 </template>
-

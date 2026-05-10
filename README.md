@@ -24,14 +24,14 @@ This library is compatible with vue 3.0, and leaflet 1.9.x.
 
 ## Components
 
-| Category | Components |
-| --- | --- |
-| Map | `LMap`, `LPane` |
-| Layer containers | `LLayerGroup`, `LFeatureGroup` |
-| Raster layers | `LTilelayer`, `LTileLayer`, `LTileLayerWMS` |
-| Marker and overlays | `LMarker`, `LPopup`, `LTooltip`, `LImageOverlay`, `LVideoOverlay`, `LSVGOverlay` |
-| Vector layers | `LCircle`, `LCircleMarker`, `LPolygon`, `LPolyline`, `LRectangle`, `LGeojson` |
-| Controls | `LControl`, `LControlAttribution`, `LControlLayers`, `LControlScale`, `LControlZoom` |
+| Category            | Components                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------ |
+| Map                 | `LMap`, `LPane`                                                                      |
+| Layer containers    | `LLayerGroup`, `LFeatureGroup`                                                       |
+| Raster layers       | `LTilelayer`, `LTileLayer`, `LTileLayerWMS`                                          |
+| Marker and overlays | `LMarker`, `LPopup`, `LTooltip`, `LImageOverlay`, `LVideoOverlay`, `LSVGOverlay`     |
+| Vector layers       | `LCircle`, `LCircleMarker`, `LPolygon`, `LPolyline`, `LRectangle`, `LGeojson`        |
+| Controls            | `LControl`, `LControlAttribution`, `LControlLayers`, `LControlScale`, `LControlZoom` |
 
 See [docs/components.md](docs/components.md) for props and events.
 
@@ -117,7 +117,9 @@ You can input some Vue-styled components in a .vue file in order to use leaflet.
 
 ```html
 <l-map id="map2" :options="mapOptions">
-  <l-tile-layer urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+  <l-tile-layer
+    urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
 
   <l-layer-group>
     <l-marker id="group-marker" :latlng="[51.505, -0.09]" />
@@ -138,7 +140,9 @@ You can input some Vue-styled components in a .vue file in order to use leaflet.
 
 ```html
 <l-map id="map3" :options="mapOptions">
-  <l-tile-layer urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+  <l-tile-layer
+    urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  />
 
   <l-control position="topright">
     <button type="button">Reset view</button>

@@ -24,7 +24,7 @@ export default defineConfig({
         // for externalized deps
         globals: {
           vue: 'Vue',
-          leaflet: 'L'
+          leaflet: 'L',
         },
       },
     },

@@ -1,6 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { Circle, Marker, TileLayer } from 'leaflet';
-import { updateCircleOptions, updateMarkerOptions, updateTileLayerOptions } from './layerOptions';
+import {
+  updateCircleOptions,
+  updateMarkerOptions,
+  updateTileLayerOptions,
+} from './layerOptions';
 
 describe('layer option updaters', () => {
   it('updates circle style and radius', () => {
@@ -61,4 +65,3 @@ describe('layer option updaters', () => {
     expect(tileLayer.setZIndex).toHaveBeenCalledWith(200);
   });
 });
-

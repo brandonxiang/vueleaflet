@@ -20,6 +20,8 @@
     "build:example": "vite build --config vite.example.config.ts",
     "build:js": "vite build",
     "build": "pnpm run build:js && pnpm exec vue-tsc --emitDeclarationOnly",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -34,6 +36,7 @@
     "@vitejs/plugin-vue": "^6.0.6",
     "@vue/test-utils": "^2.4.10",
     "jsdom": "^29.1.1",
+    "prettier": "^3.8.3",
     "release-it": "^20.0.1",
     "typescript": "^6.0.3",
     "vite": "^8.0.11",

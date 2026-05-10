@@ -21,9 +21,9 @@ import {
   LControlScale,
   LControl,
   LGeojson,
-} from "../src";
-import "../node_modules/leaflet/dist/leaflet.css";
-import L from "leaflet";
+} from '../src';
+import '../node_modules/leaflet/dist/leaflet.css';
+import L from 'leaflet';
 import LCustomPlugin from './LCustomPlugin.vue';
 
 const mapOptions = {
@@ -36,44 +36,44 @@ const mapOptions = {
 };
 
 const tileLayerOptions = {
-  attribution: "vue-leaflet",
+  attribution: 'vue-leaflet',
   maxZoom: 18,
-  id: "mapbox/streets-v11",
+  id: 'mapbox/streets-v11',
   tileSize: 512,
   zoomOffset: -1,
   accessToken:
-    "pk.eyJ1IjoieHdwaXNtZSIsImEiOiJ5cTlCQTlRIn0.QdV-wNUKbgs7jAlbVE747Q",
+    'pk.eyJ1IjoieHdwaXNtZSIsImEiOiJ5cTlCQTlRIn0.QdV-wNUKbgs7jAlbVE747Q',
 };
 
 const baseLayerOptions = {
   geoqBlue: new L.TileLayer(
-    "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+    'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
     {
-      attribution: "geoq blue",
+      attribution: 'geoq blue',
     }
   ),
   高德影像: new L.TileLayer(
-    "http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+    'http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
     {
-      subdomains: "1234",
-      attribution: "高德影像",
+      subdomains: '1234',
+      attribution: '高德影像',
     }
   ),
 };
 
 const tmpGeojson = {
-       "type": "Feature",
-       "geometry": {
-           "type": "Polygon",
-           "coordinates": [
-               [
-                [-0.08, 51.509],
-                [-0.06, 51.503],
-                [-0.047, 51.51],
-               ]
-           ]
-       }
-   };
+  type: 'Feature',
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [-0.08, 51.509],
+        [-0.06, 51.503],
+        [-0.047, 51.51],
+      ],
+    ],
+  },
+};
 
 const imageBounds = [
   [51.49, -0.13],
@@ -81,12 +81,11 @@ const imageBounds = [
 ];
 
 const wmsOptions = {
-  layers: "nexrad-n0r-900913",
-  format: "image/png",
+  layers: 'nexrad-n0r-900913',
+  format: 'image/png',
   transparent: true,
-  attribution: "Weather data © IEM Nexrad",
+  attribution: 'Weather data © IEM Nexrad',
 };
-
 </script>
 
 <template>
@@ -196,10 +195,7 @@ const wmsOptions = {
   </div>
   <div>
     <h1>Layer Containers and Overlays</h1>
-    <l-map
-      id="map4"
-      :options="mapOptions"
-    >
+    <l-map id="map4" :options="mapOptions">
       <LPane name="labels" :z-index="650" class-name="labels-pane" />
       <l-tilelayer
         urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
@@ -235,10 +231,7 @@ const wmsOptions = {
   </div>
   <div>
     <h1>Custom Plugin</h1>
-    <l-map
-      id="map5"
-      :options="mapOptions"
-    >
+    <l-map id="map5" :options="mapOptions">
       <l-tilelayer
         urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
         :options="tileLayerOptions"

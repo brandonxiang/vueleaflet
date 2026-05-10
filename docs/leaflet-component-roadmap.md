@@ -18,14 +18,14 @@
 
 已封装组件：
 
-| 类别 | 组件 |
-| --- | --- |
-| 地图 | `LMap` |
-| 栅格图层 | `LTilelayer` |
-| 点位与弹层 | `LMarker`, `LPopup`, `LTooltip` |
-| 矢量图形 | `LCircle`, `LCircleMarker`, `LPolygon`, `LPolyline`, `LRectangle` |
-| 控件 | `LControlAttribution`, `LControlLayers`, `LControlScale`, `LControlZoom` |
-| 数据图层 | `LGeojson` |
+| 类别       | 组件                                                                     |
+| ---------- | ------------------------------------------------------------------------ |
+| 地图       | `LMap`                                                                   |
+| 栅格图层   | `LTilelayer`                                                             |
+| 点位与弹层 | `LMarker`, `LPopup`, `LTooltip`                                          |
+| 矢量图形   | `LCircle`, `LCircleMarker`, `LPolygon`, `LPolyline`, `LRectangle`        |
+| 控件       | `LControlAttribution`, `LControlLayers`, `LControlScale`, `LControlZoom` |
+| 数据图层   | `LGeojson`                                                               |
 
 当前主要缺口：
 
@@ -63,18 +63,18 @@
 
 ## 组件优先级
 
-| 优先级 | 组件 | Leaflet API | 价值 |
-| --- | --- | --- | --- |
-| P0 | `LLayerGroup` | `L.layerGroup` | 支撑图层分组和后续嵌套能力 |
-| P0 | `LFeatureGroup` | `L.featureGroup` | 支撑子图层事件聚合和 bounds 计算 |
-| P0 | `LPane` | `map.createPane` | 支撑图层 z-index 和复杂叠加顺序 |
-| P1 | `LImageOverlay` | `L.imageOverlay` | 常见图片覆盖物 |
-| P1 | `LVideoOverlay` | `L.videoOverlay` | 视频覆盖物 |
-| P1 | `LSVGOverlay` | `L.svgOverlay` | SVG 覆盖物 |
-| P1 | `LTileLayerWMS` | `L.tileLayer.wms` | GIS 常用 WMS 服务 |
-| P2 | `LControl` | `L.Control.extend` 或 `L.control` | 支持自定义控件和 Vue slot |
-| P2 | `LGridLayer` | `L.GridLayer.extend` | 高级自定义瓦片能力，适合后置 |
-| P2 | `LGeojson` 增强 | `L.geoJSON` | 支持 typed GeoJSON、数据更新、style 更新 |
+| 优先级 | 组件            | Leaflet API                       | 价值                                     |
+| ------ | --------------- | --------------------------------- | ---------------------------------------- |
+| P0     | `LLayerGroup`   | `L.layerGroup`                    | 支撑图层分组和后续嵌套能力               |
+| P0     | `LFeatureGroup` | `L.featureGroup`                  | 支撑子图层事件聚合和 bounds 计算         |
+| P0     | `LPane`         | `map.createPane`                  | 支撑图层 z-index 和复杂叠加顺序          |
+| P1     | `LImageOverlay` | `L.imageOverlay`                  | 常见图片覆盖物                           |
+| P1     | `LVideoOverlay` | `L.videoOverlay`                  | 视频覆盖物                               |
+| P1     | `LSVGOverlay`   | `L.svgOverlay`                    | SVG 覆盖物                               |
+| P1     | `LTileLayerWMS` | `L.tileLayer.wms`                 | GIS 常用 WMS 服务                        |
+| P2     | `LControl`      | `L.Control.extend` 或 `L.control` | 支持自定义控件和 Vue slot                |
+| P2     | `LGridLayer`    | `L.GridLayer.extend`              | 高级自定义瓦片能力，适合后置             |
+| P2     | `LGeojson` 增强 | `L.geoJSON`                       | 支持 typed GeoJSON、数据更新、style 更新 |
 
 ## 实施计划
 
@@ -183,16 +183,16 @@
 
 ## 推荐任务拆分
 
-| 任务 | 范围 | 依赖 | 规模 |
-| --- | --- | --- | --- |
-| 1. 建立 layer container 注入协议 | core/utils + tests | 无 | M |
-| 2. 新增 `LLayerGroup` | component + export + tests + example | 任务 1 | S |
-| 3. 新增 `LFeatureGroup` | component + export + tests + example | 任务 1 | S |
-| 4. 新增 overlay 三件套 | image/video/svg components + tests | 任务 1 | M |
-| 5. 新增 `LTileLayerWMS` | component + tests + example | 任务 1 | S |
-| 6. 新增 `LControl` 自定义控件 | component + DOM mount tests | 任务 1 | M |
-| 7. 迁移现有组件到通用生命周期 | existing components + tests | 任务 1-6 可并行后置 | M |
-| 8. 完善 README 和 examples | docs/examples | 组件完成后 | S |
+| 任务                             | 范围                                 | 依赖                | 规模 |
+| -------------------------------- | ------------------------------------ | ------------------- | ---- |
+| 1. 建立 layer container 注入协议 | core/utils + tests                   | 无                  | M    |
+| 2. 新增 `LLayerGroup`            | component + export + tests + example | 任务 1              | S    |
+| 3. 新增 `LFeatureGroup`          | component + export + tests + example | 任务 1              | S    |
+| 4. 新增 overlay 三件套           | image/video/svg components + tests   | 任务 1              | M    |
+| 5. 新增 `LTileLayerWMS`          | component + tests + example          | 任务 1              | S    |
+| 6. 新增 `LControl` 自定义控件    | component + DOM mount tests          | 任务 1              | M    |
+| 7. 迁移现有组件到通用生命周期    | existing components + tests          | 任务 1-6 可并行后置 | M    |
+| 8. 完善 README 和 examples       | docs/examples                        | 组件完成后          | S    |
 
 ## 测试策略
 
@@ -209,12 +209,12 @@
 
 ## 风险和处理
 
-| 风险 | 影响 | 处理 |
-| --- | --- | --- |
-| Leaflet 部分 API 依赖真实 DOM 尺寸 | 测试不稳定 | 单测 mock Leaflet，真实渲染留给 example 手动验证 |
-| 嵌套 provide 设计不清晰 | 后续组件难扩展 | 先实现最小 layer container 协议，再迁移组件 |
-| props 更新和 Leaflet options 不完全一一对应 | API 行为不一致 | 对可更新属性显式 watch，不承诺所有 options 都可热更新 |
-| 改动现有组件生命周期 | 可能破坏历史用法 | 先补测试，再逐步迁移，导出保持兼容 |
+| 风险                                        | 影响             | 处理                                                  |
+| ------------------------------------------- | ---------------- | ----------------------------------------------------- |
+| Leaflet 部分 API 依赖真实 DOM 尺寸          | 测试不稳定       | 单测 mock Leaflet，真实渲染留给 example 手动验证      |
+| 嵌套 provide 设计不清晰                     | 后续组件难扩展   | 先实现最小 layer container 协议，再迁移组件           |
+| props 更新和 Leaflet options 不完全一一对应 | API 行为不一致   | 对可更新属性显式 watch，不承诺所有 options 都可热更新 |
+| 改动现有组件生命周期                        | 可能破坏历史用法 | 先补测试，再逐步迁移，导出保持兼容                    |
 
 ## 待确认问题
 

@@ -1,7 +1,10 @@
 import { mount } from '@vue/test-utils';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { nextTick } from 'vue';
-import { LEAFLET_LAYER_PROVIDER, type LeafletLayerProvider } from '../core/Layer';
+import {
+  LEAFLET_LAYER_PROVIDER,
+  type LeafletLayerProvider,
+} from '../core/Layer';
 import LMarker from './LMarker.vue';
 import LPolyline from './LPolyline.vue';
 import LTilelayer from './LTilelayer.vue';
@@ -122,4 +125,3 @@ describe('existing component lifecycle', () => {
     expect(provider.removeLayer).toHaveBeenCalledWith(tileLayer);
   });
 });
-

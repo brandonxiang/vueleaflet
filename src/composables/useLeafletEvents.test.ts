@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { Evented, LeafletEvent } from 'leaflet';
-import { bindLeafletEvents, bindLeafletEventsFromAttrs } from './useLeafletEvents';
+import {
+  bindLeafletEvents,
+  bindLeafletEventsFromAttrs,
+} from './useLeafletEvents';
 
 describe('bindLeafletEvents', () => {
   it('binds configured handlers and returns an unbind function', () => {

@@ -11,7 +11,9 @@ type LayerTarget = Map | LayerGroup;
 
 export const LEAFLET_LAYER_PROVIDER = 'leafletLayerProvider';
 
-export const createLeafletLayerProvider = (parent?: LeafletLayerProvider | null) => {
+export const createLeafletLayerProvider = (
+  parent?: LeafletLayerProvider | null
+) => {
   let target: LayerTarget | null = null;
   const pendingLayers = new Set<Layer>();
   const pendingControls = new Set<Control>();
