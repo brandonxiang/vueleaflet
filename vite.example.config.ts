@@ -1,6 +1,9 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite-plus';
 import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const rootDir = fileURLToPath(new URL('.', import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,7 +11,7 @@ export default defineConfig({
     outDir: 'build',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
+        main: resolve(rootDir, 'index.html'),
       },
     },
   },
