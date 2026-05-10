@@ -16,15 +16,15 @@
     }
   },
   "scripts": {
-    "dev": "vite dev --config vite.example.config.ts",
-    "build:example": "vite build --config vite.example.config.ts",
-    "build:js": "vite build",
+    "dev": "vp dev --config vite.example.config.ts",
+    "build:example": "vp build --config vite.example.config.ts",
+    "build:js": "vp build",
     "build": "pnpm run build:js && pnpm exec vue-tsc --emitDeclarationOnly",
     "check:dist": "pnpm build && node scripts/check-dist.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "test": "vp test run",
+    "test:watch": "vp test"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -40,7 +40,8 @@
     "prettier": "^3.8.3",
     "release-it": "^20.0.1",
     "typescript": "^6.0.3",
-    "vite": "^8.0.11",
+    "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.20",
+    "vite-plus": "^0.1.20",
     "vitest": "^4.1.5",
     "vue-tsc": "^3.2.8"
   },
