@@ -33,6 +33,8 @@ This library is compatible with vue 3.0, and leaflet 1.9.x.
 | Vector layers | `LCircle`, `LCircleMarker`, `LPolygon`, `LPolyline`, `LRectangle`, `LGeojson` |
 | Controls | `LControl`, `LControlAttribution`, `LControlLayers`, `LControlScale`, `LControlZoom` |
 
+See [docs/components.md](docs/components.md) for props and events.
+
 ## Installation
 
 ```bash

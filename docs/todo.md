@@ -19,7 +19,7 @@
 - [x] README 增加完整组件清单。
 - [x] README 增加 LayerGroup、Overlay、Control、Pane 示例。
 - [x] `examples/Layout.vue` 增加嵌套图层、图片覆盖物、WMS、自定义 Control 和 Pane 示例。
-- [ ] 为每个组件补 props/events 文档。
+- [x] 为每个组件补 props/events 文档。
 
 ## P1: 工程质量
 
