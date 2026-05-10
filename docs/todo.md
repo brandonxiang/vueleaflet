@@ -24,7 +24,7 @@
 ## P1: 工程质量
 
 - [ ] 增加 lint/format 配置，统一代码风格。
-- [ ] 增加 GitHub Actions，至少运行 `pnpm test` 和 `pnpm build`。
+- [x] 增加 GitHub Actions，至少运行 `pnpm test` 和 `pnpm build`。
 - [ ] 增加 changeset 或 release notes 流程。
 - [ ] 发布前补 bundle size 和类型声明检查。
 
