@@ -31,5 +31,5 @@
 ## P2: 扩展能力
 
 - [x] 提供 `createLeafletLayerComponent` 扩展模板，方便封装 Leaflet 插件。
-- [ ] 增强 `LGeojson`，支持局部 feature 更新。
+- [x] 增强 `LGeojson`，支持局部 feature 更新。
 - [x] 评估是否需要 `LGridLayer`，用于高级自定义瓦片。

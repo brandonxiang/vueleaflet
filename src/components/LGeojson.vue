@@ -4,8 +4,13 @@ import type { GeoJsonObject } from 'geojson';
 import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
 import { layerEvents } from '../utils/events';
+import {
+  createTrackedGeoJsonOptions,
+  syncGeoJsonFeatures,
+} from '../utils/geojson';
 
 const attrs = useAttrs();
+const featureLayers = new Map();
 
 const props = defineProps({
   geojson: {
@@ -16,10 +21,31 @@ const props = defineProps({
     type: Object as PropType<GeoJSONOptions>,
     required: false,
   },
+  featureIdKey: {
+    type: String,
+    required: false,
+    default: 'id',
+  },
 });
 
 const geojsonRef = useLeafletLayer(
-  () => L.geoJSON(props.geojson, props.options),
+  () => {
+    const geojsonLayer = L.geoJSON(undefined, {
+      ...props.options,
+      ...createTrackedGeoJsonOptions(
+        featureLayers,
+        props.featureIdKey,
+        props.options?.onEachFeature
+      ),
+    });
+    syncGeoJsonFeatures(
+      geojsonLayer,
+      props.geojson,
+      featureLayers,
+      props.featureIdKey
+    );
+    return geojsonLayer;
+  },
   {
     attrs,
     events: layerEvents,
@@ -29,8 +55,12 @@ const geojsonRef = useLeafletLayer(
 watch(
   () => props.geojson,
   (geojson) => {
-    geojsonRef.value?.clearLayers();
-    geojsonRef.value?.addData(geojson);
+    syncGeoJsonFeatures(
+      geojsonRef.value,
+      geojson,
+      featureLayers,
+      props.featureIdKey
+    );
   },
   { deep: true }
 );
