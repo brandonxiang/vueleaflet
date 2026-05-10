@@ -4,7 +4,7 @@
 
 - [x] 为 `LLayerGroup` 和 `LFeatureGroup` 补组件 mount 测试，覆盖子图层挂载到最近父容器。
 - [x] 为 Overlay 组件补 mount、prop 更新、unmount 测试。
-- [ ] 为 `LControl` 补 slot 渲染和卸载测试。
+- [x] 为 `LControl` 补 slot 渲染和卸载测试。
 - [x] 为现有 Marker、Vector、TileLayer 补卸载测试。
 
 ## P0: 组件能力补齐

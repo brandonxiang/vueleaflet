@@ -284,10 +284,10 @@ describe('new layer components', () => {
     expect(provider.removeLayer).toHaveBeenCalledWith(layer);
   });
 
-  it('adds LControl to the parent provider', async () => {
+  it('renders LControl slot content and removes the control on unmount', async () => {
     const provider = createProvider();
 
-    mount(LControl, {
+    const wrapper = mount(LControl, {
       props: {
         position: 'bottomleft',
       },
@@ -305,6 +305,18 @@ describe('new layer components', () => {
 
     expect(provider.addControl).toHaveBeenCalledTimes(1);
     expect(leafletMocks.controlExtend).toHaveBeenCalledTimes(1);
+
+    const control = vi.mocked(provider.addControl).mock.calls[0][0] as {
+      onAdd: () => HTMLElement;
+    };
+    const container = control.onAdd();
+    await nextTick();
+
+    expect(container.textContent).toContain('Reset');
+
+    wrapper.unmount();
+
+    expect(provider.removeControl).toHaveBeenCalledWith(control);
   });
 
   it('creates and removes LPane', async () => {
