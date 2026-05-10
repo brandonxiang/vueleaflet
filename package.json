@@ -20,6 +20,7 @@
     "build:example": "vite build --config vite.example.config.ts",
     "build:js": "vite build",
     "build": "pnpm run build:js && pnpm exec vue-tsc --emitDeclarationOnly",
+    "check:dist": "pnpm build && node scripts/check-dist.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
