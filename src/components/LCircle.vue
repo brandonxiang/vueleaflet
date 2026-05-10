@@ -3,6 +3,7 @@ import L, { CircleOptions, LatLngExpression } from 'leaflet'
 import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
 import { layerEvents } from '../utils/events';
+import { updateCircleOptions } from '../utils/layerOptions';
 
 const attrs = useAttrs();
 
@@ -25,6 +26,14 @@ watch(
   () => props.latlng,
   (latlng) => {
     circleRef.value?.setLatLng(latlng);
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.options,
+  (options) => {
+    updateCircleOptions(circleRef.value, options);
   },
   { deep: true }
 );

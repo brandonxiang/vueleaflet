@@ -10,6 +10,7 @@ import { MARK_PROVIDE, getMarkerInjectKey } from '../utils/injectKey';
 import { LEAFLET_LAYER_PROVIDER, type LeafletLayerProvider } from '../core/Layer';
 import { bindLeafletEventsFromAttrs } from '../composables/useLeafletEvents';
 import { markerEvents } from '../utils/events';
+import { updateMarkerOptions } from '../utils/layerOptions';
 
 const props = defineProps({
   id: {
@@ -49,6 +50,14 @@ watch(
   () => props.latlng,
   (latlng) => {
     marker?.setLatLng(latlng);
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.options,
+  (options) => {
+    updateMarkerOptions(marker, options);
   },
   { deep: true }
 );

@@ -12,7 +12,7 @@
 - [x] 新增 `LPane`，支持 `name`、`zIndex`、`className`、`style`。
 - [x] 为历史 `LTilelayer` 增加 `LTileLayer` alias，保持兼容并贴近 Leaflet 命名。
 - [x] 将 `useLeafletEvents` 接入 `LMarker`、Vector、Overlay、`LMap`，支持 Vue 事件写法。
-- [ ] 补齐现有组件 props 更新：Vector `setStyle`、Marker icon/draggable、TileLayer opacity/zIndex。
+- [x] 补齐现有组件 props 更新：Vector `setStyle`、Marker icon/draggable、TileLayer opacity/zIndex。
 
 ## P1: 文档和示例
 

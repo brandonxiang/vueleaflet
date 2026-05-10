@@ -3,6 +3,7 @@ import L, { PolylineOptions, LatLngExpression, LatLngBoundsExpression } from 'le
 import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
 import { layerEvents } from '../utils/events';
+import { updatePathOptions } from '../utils/layerOptions';
 
 const attrs = useAttrs();
 
@@ -26,6 +27,14 @@ watch(
   () => props.latLngBounds,
   (latLngBounds) => {
     rectangleRef.value?.setBounds(latLngBounds);
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.options,
+  (options) => {
+    updatePathOptions(rectangleRef.value, options);
   },
   { deep: true }
 );

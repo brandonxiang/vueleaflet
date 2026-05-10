@@ -3,6 +3,7 @@ import L, { PolylineOptions, LatLngExpression } from 'leaflet'
 import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
 import { layerEvents } from '../utils/events';
+import { updatePathOptions } from '../utils/layerOptions';
 
 const attrs = useAttrs();
 
@@ -26,6 +27,14 @@ watch(
   () => props.latlngs,
   (latlngs) => {
     polygonRef.value?.setLatLngs(latlngs);
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.options,
+  (options) => {
+    updatePathOptions(polygonRef.value, options);
   },
   { deep: true }
 );
