@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import L from 'leaflet'
-import { PropType, inject, nextTick } from 'vue';
-import { MapProvide } from '../core/Map';
-import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
-
-
-const mapProvide = inject<MapProvide>(MAP_PROVIDE);
-
-const key = getMapInjectKey();
+import { PropType } from 'vue';
+import { useLeafletControl } from '../composables/useLeafletControl';
 
 const props = defineProps({
   options: {
@@ -16,10 +10,7 @@ const props = defineProps({
   }
 })
 
-nextTick(() => {
-  const attribution = L.control.attribution(props.options);
-  mapProvide?.getMap(key)?.addControl(attribution);
-})
+useLeafletControl(() => L.control.attribution(props.options));
 
 </script>
 

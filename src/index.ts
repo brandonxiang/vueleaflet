@@ -1,4 +1,6 @@
 export { default as LMap } from './components/LMap.vue';
+export { default as LLayerGroup } from './components/LLayerGroup.vue';
+export { default as LFeatureGroup } from './components/LFeatureGroup.vue';
 export { default as LMarker } from './components/LMarker.vue'; 
 export { default as LTooltip } from './components/LTooltip.vue';
 export { default as LTilelayer} from './components/LTilelayer.vue';
@@ -12,7 +14,13 @@ export { default as LControlAttribution } from './components/LControlAttribution
 export { default as LControlLayers } from './components/LControlLayers.vue';
 export { default as LControlScale } from './components/LControlScale.vue';
 export { default as LControlZoom } from './components/LControlZoom.vue';
+export { default as LControl } from './components/LControl.vue';
 export { default as LGeojson } from './components/LGeojson.vue';
+export { default as LImageOverlay } from './components/LImageOverlay.vue';
+export { default as LVideoOverlay } from './components/LVideoOverlay.vue';
+export { default as LSVGOverlay } from './components/LSVGOverlay.vue';
+export { default as LTileLayerWMS } from './components/LTileLayerWMS.vue';
 export * from './utils/injectKey';
+export * from './core/Layer';
 export type {MapProvide} from './core/Map';
 export type {MarkerProvide} from './core/Marker';

@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import L, { PolylineOptions, LatLngExpression } from 'leaflet'
-import { PropType, inject, nextTick } from 'vue';
-import { MapProvide } from '../core/Map';
-import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
-
-
-const mapProvide = inject<MapProvide>(MAP_PROVIDE);
-
-const key = getMapInjectKey();
+import { PropType, watch } from 'vue';
+import { useLeafletLayer } from '../composables/useLeafletLayer';
 
 const props = defineProps({
   latlngs: {
@@ -20,11 +14,15 @@ const props = defineProps({
     }
 })
 
-nextTick(() => {
-  const polygon = L.polyline(props.latlngs, props.options);
+const polylineRef = useLeafletLayer(() => L.polyline(props.latlngs, props.options));
 
-  mapProvide?.getMap(key)?.addLayer(polygon);
-})
+watch(
+  () => props.latlngs,
+  (latlngs) => {
+    polylineRef.value?.setLatLngs(latlngs);
+  },
+  { deep: true }
+);
 
 </script>  
 

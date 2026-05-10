@@ -1,9 +1,8 @@
 
 <script setup lang="ts">
 import L, { type TileLayerOptions } from 'leaflet';
-import { type PropType, inject, nextTick } from 'vue'
-import type { MapProvide } from '../core/Map';
-import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
+import { type PropType, watch } from 'vue'
+import { useLeafletLayer } from '../composables/useLeafletLayer';
 
 
 
@@ -18,18 +17,14 @@ const props = defineProps({
     }
 });
 
-const mapProvide = inject<MapProvide>(MAP_PROVIDE);
+const tileLayerRef = useLeafletLayer(() => L.tileLayer(props.urlTemplate, props.options));
 
-const key = getMapInjectKey()
-
-nextTick(() => {
-    const tilelayer = L.tileLayer(props.urlTemplate, props.options)
-    const map = mapProvide?.getMap(key);
-    map?.addLayer(tilelayer);
-})
-
-
-
+watch(
+    () => props.urlTemplate,
+    (urlTemplate) => {
+        tileLayerRef.value?.setUrl(urlTemplate);
+    }
+);
 
 
 </script>

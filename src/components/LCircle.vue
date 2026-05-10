@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import L, { CircleOptions, LatLngExpression } from 'leaflet'
-import { PropType, inject, nextTick } from 'vue';
-import { MapProvide } from '../core/Map';
-import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
-
-
-const mapProvide = inject<MapProvide>(MAP_PROVIDE);
-
-const key = getMapInjectKey();
+import { PropType, watch } from 'vue';
+import { useLeafletLayer } from '../composables/useLeafletLayer';
 
 const props = defineProps({
   latlng: {
@@ -19,13 +13,15 @@ const props = defineProps({
     required: false
   }
 })
+const circleRef = useLeafletLayer(() => L.circle(props.latlng, props.options ?? {}));
 
-
-
-nextTick(() => {
-  const circle = L.circle(props.latlng, props.options ?? {});
-  mapProvide?.getMap(key)?.addLayer(circle);
-})
+watch(
+  () => props.latlng,
+  (latlng) => {
+    circleRef.value?.setLatLng(latlng);
+  },
+  { deep: true }
+);
 
 </script>  
 

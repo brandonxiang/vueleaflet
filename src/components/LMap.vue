@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { PropType, onMounted } from 'vue'
+import { PropType, onBeforeUnmount, onMounted, provide, shallowRef } from 'vue'
 import { MapOptions } from 'leaflet';
-import { provide } from 'vue'
 import L from 'leaflet';
 import { mapProvide } from '../core/Map';
 import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
+import { createLeafletLayerProvider, LEAFLET_LAYER_PROVIDER } from '../core/Layer';
 
 
 const props = defineProps({
@@ -18,14 +18,24 @@ const props = defineProps({
   }
 });
 
-provide(MAP_PROVIDE, mapProvide)
-
 const key = getMapInjectKey(props.id);
+const mapRef = shallowRef<L.Map | null>(null);
+const layerProvider = createLeafletLayerProvider();
+
+provide(MAP_PROVIDE, mapProvide);
+provide(LEAFLET_LAYER_PROVIDER, layerProvider);
 
 onMounted(() => {
-  console.log(props.id);
   const content  = L.map(props.id, props.options);
+  mapRef.value = content;
   mapProvide.setMap(key, content);
+  layerProvider.setTarget(content);
+})
+
+onBeforeUnmount(() => {
+  mapRef.value?.remove();
+  mapRef.value = null;
+  layerProvider.clearTarget();
 })
 
 defineExpose({

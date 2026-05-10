@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import L, { GeoJSONOptions } from 'leaflet'
-
-import { PropType, inject, nextTick } from 'vue';
-import { MapProvide } from '../core/Map';
-import { MAP_PROVIDE, getMapInjectKey } from '../utils/injectKey';
-
-
-const mapProvide = inject<MapProvide>(MAP_PROVIDE);
-
-const key = getMapInjectKey();
+import type { GeoJsonObject } from 'geojson';
+import { PropType, watch } from 'vue';
+import { useLeafletLayer } from '../composables/useLeafletLayer';
 
 const props = defineProps({
   geojson: {
-    // GeojsonObject type error
-    type: Object as PropType<any>,
+    type: Object as PropType<GeoJsonObject>,
     required: true
   },
   options: {
@@ -22,10 +15,16 @@ const props = defineProps({
   }
 })
 
-nextTick(() => {
-  const geojson = L.geoJSON(props.geojson, props.options);
-  mapProvide?.getMap(key)?.addLayer(geojson);
-})
+const geojsonRef = useLeafletLayer(() => L.geoJSON(props.geojson, props.options));
+
+watch(
+  () => props.geojson,
+  (geojson) => {
+    geojsonRef.value?.clearLayers();
+    geojsonRef.value?.addData(geojson);
+  },
+  { deep: true }
+);
 
 </script>  
 

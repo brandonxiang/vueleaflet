@@ -1,33 +1,13 @@
 <script setup lang="ts">
 
 import L, { type LatLngExpression, type MarkerOptions } from 'leaflet';
-import { type PropType, inject, nextTick, onMounted, provide, ref, useAttrs, useSlots } from 'vue';
-import { type MapProvide } from '../core/Map';
+import { type PropType, nextTick, onBeforeUnmount, provide, watch, inject } from 'vue';
 import defaultIcon from 'leaflet/dist/images/marker-icon.png'
 import defaultIconShadow from 'leaflet/dist/images/marker-shadow.png';
 import defaultIconRetina from 'leaflet/dist/images/marker-icon-2x.png';
 import { markerProvide } from '../core/Marker';
-import { MAP_PROVIDE, MARK_PROVIDE, getMapInjectKey, getMarkerInjectKey } from '../utils/injectKey';
-
-const events = [
-  'click',
-  'dblclick',
-  'mousedown',
-  'mouseover',
-  'mouseout',
-  'contextmenu',
-  'dragstart',
-  'drag',
-  'dragend',
-  'move',
-  'add',
-  'remove',
-  'popupopen',
-  'popupclose',
-  'tooltipopen',
-  'tooltipclose'
-];
-
+import { MARK_PROVIDE, getMarkerInjectKey } from '../utils/injectKey';
+import { LEAFLET_LAYER_PROVIDER, type LeafletLayerProvider } from '../core/Layer';
 
 const props = defineProps({
   id: {
@@ -45,23 +25,34 @@ const props = defineProps({
 });
 
 
-const mapProvide = inject<MapProvide>(MAP_PROVIDE);
 provide(MARK_PROVIDE, markerProvide);
 
 const markerKey = getMarkerInjectKey(props.id);
-const mapKey = getMapInjectKey();
+const layerProvider = inject<LeafletLayerProvider | null>(LEAFLET_LAYER_PROVIDER, null);
+let marker: L.Marker | null = null;
 
 
 nextTick(() => {
   fixImageUrl();
-  const marker = L.marker(props.latlng, props.options);
+  marker = L.marker(props.latlng, props.options);
 
   markerProvide.setMarker(markerKey, marker);
-
-
-  mapProvide?.getMap(mapKey)?.addLayer(marker);
-
+  layerProvider?.addLayer(marker);
 })
+
+watch(
+  () => props.latlng,
+  (latlng) => {
+    marker?.setLatLng(latlng);
+  },
+  { deep: true }
+);
+
+onBeforeUnmount(() => {
+  if (marker) {
+    layerProvider?.removeLayer(marker);
+  }
+});
 
 defineExpose({
   id: props.id,
