@@ -6,9 +6,11 @@ describe('public exports', () => {
     expect(exports.LMap).toBeDefined();
     expect(exports.LLayerGroup).toBeDefined();
     expect(exports.LFeatureGroup).toBeDefined();
+    expect(exports.LPane).toBeDefined();
     expect(exports.LMarker).toBeDefined();
     expect(exports.LTooltip).toBeDefined();
     expect(exports.LTilelayer).toBeDefined();
+    expect(exports.LTileLayer).toBe(exports.LTilelayer);
     expect(exports.LPopup).toBeDefined();
     expect(exports.LCircle).toBeDefined();
     expect(exports.LCircleMarker).toBeDefined();

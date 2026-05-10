@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import {
   LMap,
+  LPane,
+  LLayerGroup,
+  LFeatureGroup,
   LTilelayer,
+  LTileLayerWMS,
+  LImageOverlay,
   LMarker,
   LTooltip,
   LPopup,
@@ -14,6 +19,7 @@ import {
   LControlLayers,
   LControlZoom,
   LControlScale,
+  LControl,
   LGeojson,
 } from "../src";
 import "../node_modules/leaflet/dist/leaflet.css";
@@ -69,7 +75,17 @@ const tmpGeojson = {
        }
    };
 
+const imageBounds = [
+  [51.49, -0.13],
+  [51.52, -0.06],
+];
 
+const wmsOptions = {
+  layers: "nexrad-n0r-900913",
+  format: "image/png",
+  transparent: true,
+  attribution: "Weather data © IEM Nexrad",
+};
 
 </script>
 
@@ -179,16 +195,42 @@ const tmpGeojson = {
     </l-map>
   </div>
   <div>
-    <h1>Feature Layer</h1>
+    <h1>Layer Containers and Overlays</h1>
     <l-map
       id="map4"
       :options="mapOptions"
     >
+      <LPane name="labels" :z-index="650" class-name="labels-pane" />
       <l-tilelayer
         urlTemplate="https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}"
         :options="tileLayerOptions"
       />
-      <LGeojson :geojson="tmpGeojson" />
+      <LLayerGroup>
+        <l-marker
+          id="group-marker"
+          :latlng="{ lat: 51.506, lng: -0.095 }"
+          :options="{ title: 'group marker' }"
+        />
+        <l-circle
+          :latlng="[51.508, -0.11]"
+          :options="{ color: '#2563eb', radius: 300 }"
+        />
+      </LLayerGroup>
+      <LFeatureGroup>
+        <LGeojson :geojson="tmpGeojson" />
+      </LFeatureGroup>
+      <LImageOverlay
+        url="https://leafletjs.com/examples/overlays/uqm_map_full.png"
+        :bounds="imageBounds"
+        :options="{ opacity: 0.35 }"
+      />
+      <LTileLayerWMS
+        base-url="https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi"
+        :options="wmsOptions"
+      />
+      <LControl position="bottomleft">
+        <div class="example-control">Custom control</div>
+      </LControl>
     </l-map>
   </div>
   <div>
@@ -229,5 +271,13 @@ body {
 
 h1 {
   padding: 0 20px;
+}
+
+.example-control {
+  padding: 8px 10px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 12px;
 }
 </style>

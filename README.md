@@ -22,6 +22,17 @@ Here is Vue components for Leaflet maps, which is inspired by [react-leaflet](ht
 
 This library is compatible with vue 3.0, and leaflet 1.9.x.
 
+## Components
+
+| Category | Components |
+| --- | --- |
+| Map | `LMap`, `LPane` |
+| Layer containers | `LLayerGroup`, `LFeatureGroup` |
+| Raster layers | `LTilelayer`, `LTileLayer`, `LTileLayerWMS` |
+| Marker and overlays | `LMarker`, `LPopup`, `LTooltip`, `LImageOverlay`, `LVideoOverlay`, `LSVGOverlay` |
+| Vector layers | `LCircle`, `LCircleMarker`, `LPolygon`, `LPolyline`, `LRectangle`, `LGeojson` |
+| Controls | `LControl`, `LControlAttribution`, `LControlLayers`, `LControlScale`, `LControlZoom` |
+
 ## Installation
 
 ```bash
@@ -100,11 +111,47 @@ You can input some Vue-styled components in a .vue file in order to use leaflet.
 </l-map>
 ```
 
+### Layer group and overlays
+
+```html
+<l-map id="map2" :options="mapOptions">
+  <l-tile-layer urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+  <l-layer-group>
+    <l-marker id="group-marker" :latlng="[51.505, -0.09]" />
+    <l-circle :latlng="[51.508, -0.11]" :options="{ radius: 500 }" />
+  </l-layer-group>
+
+  <l-image-overlay
+    url="https://leafletjs.com/examples/overlays/uqm_map_full.png"
+    :bounds="[
+      [51.49, -0.13],
+      [51.52, -0.06]
+    ]"
+  />
+</l-map>
+```
+
+### Custom control
+
+```html
+<l-map id="map3" :options="mapOptions">
+  <l-tile-layer urlTemplate="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+  <l-control position="topright">
+    <button type="button">Reset view</button>
+  </l-control>
+</l-map>
+```
+
 ## Build Setup
 
 ```bash
 # serve the example
 npm run dev
+
+# run unit tests
+npm run test
 
 # build the library
 npm run build
