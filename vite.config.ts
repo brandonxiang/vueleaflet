@@ -5,11 +5,15 @@ import path from 'node:path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  test: {
+    environment: 'jsdom',
+    include: ['src/**/*.test.ts'],
+  },
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'vueleaflet',
-      fileName: (format) => `vueleaflet.${format}.js`
+      fileName: (format) => `vueleaflet.${format}.js`,
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
@@ -21,8 +25,8 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
           leaflet: 'L'
-        }
-      }
-    }
-  }
-})
+        },
+      },
+    },
+  },
+});

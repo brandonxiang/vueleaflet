@@ -23,7 +23,7 @@ const props = defineProps({
 
 
 nextTick(() => {
-  const circle = L.circle(props.latlng, props.options);
+  const circle = L.circle(props.latlng, props.options ?? {});
   mapProvide?.getMap(key)?.addLayer(circle);
 })
 
