@@ -21,8 +21,8 @@
     "build:js": "vp build",
     "build": "pnpm run build:js && pnpm exec vue-tsc --emitDeclarationOnly",
     "check:dist": "pnpm build && node scripts/check-dist.mjs",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "vp fmt .",
+    "format:check": "vp fmt --check .",
     "test": "vp test run",
     "test:watch": "vp test"
   },
@@ -37,7 +37,6 @@
     "@vitejs/plugin-vue": "^6.0.6",
     "@vue/test-utils": "^2.4.10",
     "jsdom": "^29.1.1",
-    "prettier": "^3.8.3",
     "release-it": "^20.0.1",
     "typescript": "^6.0.3",
     "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.20",
@@ -47,5 +46,6 @@
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
-  }
+  },
+  "packageManager": "pnpm@11.0.9"
 }
