@@ -6,6 +6,9 @@ import { MAP_PROVIDE } from '../utils/injectKey';
 import LLayerGroup from './LLayerGroup.vue';
 import LFeatureGroup from './LFeatureGroup.vue';
 import LImageOverlay from './LImageOverlay.vue';
+import LSVGOverlay from './LSVGOverlay.vue';
+import LTileLayerWMS from './LTileLayerWMS.vue';
+import LVideoOverlay from './LVideoOverlay.vue';
 import LControl from './LControl.vue';
 import LPane from './LPane.vue';
 
@@ -13,6 +16,10 @@ const leafletMocks = vi.hoisted(() => ({
   layerGroup: vi.fn(),
   featureGroup: vi.fn(),
   imageOverlay: vi.fn(),
+  svgOverlay: vi.fn(),
+  videoOverlay: vi.fn(),
+  wms: vi.fn(),
+  latLngBounds: vi.fn(),
   controlExtend: vi.fn(),
   domCreate: vi.fn(),
   disableClickPropagation: vi.fn(),
@@ -24,6 +31,12 @@ vi.mock('leaflet', () => ({
     layerGroup: leafletMocks.layerGroup,
     featureGroup: leafletMocks.featureGroup,
     imageOverlay: leafletMocks.imageOverlay,
+    svgOverlay: leafletMocks.svgOverlay,
+    videoOverlay: leafletMocks.videoOverlay,
+    tileLayer: {
+      wms: leafletMocks.wms,
+    },
+    latLngBounds: leafletMocks.latLngBounds,
     Control: {
       extend: leafletMocks.controlExtend,
     },
@@ -58,6 +71,17 @@ describe('new layer components', () => {
       setUrl: vi.fn(),
       setBounds: vi.fn(),
     });
+    leafletMocks.svgOverlay.mockReturnValue({
+      setBounds: vi.fn(),
+    });
+    leafletMocks.videoOverlay.mockReturnValue({
+      setBounds: vi.fn(),
+    });
+    leafletMocks.wms.mockReturnValue({
+      setUrl: vi.fn(),
+      setParams: vi.fn(),
+    });
+    leafletMocks.latLngBounds.mockImplementation((bounds) => bounds);
     leafletMocks.domCreate.mockReturnValue(document.createElement('div'));
     leafletMocks.controlExtend.mockImplementation((definition) => {
       return class MockControl {
@@ -153,6 +177,113 @@ describe('new layer components', () => {
     expect(provider.removeLayer).toHaveBeenCalledWith(overlay);
   });
 
+  it('updates and removes LVideoOverlay', async () => {
+    const provider = createProvider();
+    const wrapper = mount(LVideoOverlay, {
+      props: {
+        url: 'https://example.com/video.mp4',
+        bounds: [
+          [0, 0],
+          [1, 1],
+        ],
+      },
+      global: {
+        provide: {
+          [LEAFLET_LAYER_PROVIDER]: provider,
+        },
+      },
+    });
+
+    await nextTick();
+
+    const overlay = leafletMocks.videoOverlay.mock.results[0].value;
+    expect(provider.addLayer).toHaveBeenCalledWith(overlay);
+
+    const nextBounds = [
+      [2, 2],
+      [3, 3],
+    ];
+    await wrapper.setProps({ bounds: nextBounds });
+
+    expect(overlay.setBounds).toHaveBeenCalledWith(nextBounds);
+
+    wrapper.unmount();
+
+    expect(provider.removeLayer).toHaveBeenCalledWith(overlay);
+  });
+
+  it('updates and removes LSVGOverlay', async () => {
+    const provider = createProvider();
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const wrapper = mount(LSVGOverlay, {
+      props: {
+        svg,
+        bounds: [
+          [0, 0],
+          [1, 1],
+        ],
+      },
+      global: {
+        provide: {
+          [LEAFLET_LAYER_PROVIDER]: provider,
+        },
+      },
+    });
+
+    await nextTick();
+
+    const overlay = leafletMocks.svgOverlay.mock.results[0].value;
+    expect(provider.addLayer).toHaveBeenCalledWith(overlay);
+
+    const nextBounds = [
+      [2, 2],
+      [3, 3],
+    ];
+    await wrapper.setProps({ bounds: nextBounds });
+
+    expect(overlay.setBounds).toHaveBeenCalledWith(nextBounds);
+
+    wrapper.unmount();
+
+    expect(provider.removeLayer).toHaveBeenCalledWith(overlay);
+  });
+
+  it('updates and removes LTileLayerWMS', async () => {
+    const provider = createProvider();
+    const wrapper = mount(LTileLayerWMS, {
+      props: {
+        baseUrl: 'https://example.com/wms',
+        options: {
+          layers: 'old',
+        },
+      },
+      global: {
+        provide: {
+          [LEAFLET_LAYER_PROVIDER]: provider,
+        },
+      },
+    });
+
+    await nextTick();
+
+    const layer = leafletMocks.wms.mock.results[0].value;
+    expect(provider.addLayer).toHaveBeenCalledWith(layer);
+
+    await wrapper.setProps({
+      baseUrl: 'https://example.com/wms-next',
+      options: {
+        layers: 'next',
+      },
+    });
+
+    expect(layer.setUrl).toHaveBeenCalledWith('https://example.com/wms-next');
+    expect(layer.setParams).toHaveBeenCalledWith({ layers: 'next' }, false);
+
+    wrapper.unmount();
+
+    expect(provider.removeLayer).toHaveBeenCalledWith(layer);
+  });
+
   it('adds LControl to the parent provider', async () => {
     const provider = createProvider();
 
@@ -209,4 +340,3 @@ describe('new layer components', () => {
     expect(remove).toHaveBeenCalled();
   });
 });
-
