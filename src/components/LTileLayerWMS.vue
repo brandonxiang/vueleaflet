@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import L, { type WMSOptions, type WMSParams } from 'leaflet';
-import { type PropType, watch } from 'vue';
+import { type PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
+import { layerEvents } from '../utils/events';
+
+const attrs = useAttrs();
 
 const props = defineProps({
   baseUrl: {
@@ -14,7 +17,10 @@ const props = defineProps({
   },
 });
 
-const wmsLayerRef = useLeafletLayer(() => L.tileLayer.wms(props.baseUrl, props.options));
+const wmsLayerRef = useLeafletLayer(() => L.tileLayer.wms(props.baseUrl, props.options), {
+  attrs,
+  events: layerEvents,
+});
 
 watch(
   () => props.baseUrl,

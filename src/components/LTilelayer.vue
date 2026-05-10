@@ -1,9 +1,11 @@
 
 <script setup lang="ts">
 import L, { type TileLayerOptions } from 'leaflet';
-import { type PropType, watch } from 'vue'
+import { type PropType, useAttrs, watch } from 'vue'
 import { useLeafletLayer } from '../composables/useLeafletLayer';
+import { layerEvents } from '../utils/events';
 
+const attrs = useAttrs();
 
 
 const props = defineProps({
@@ -17,7 +19,10 @@ const props = defineProps({
     }
 });
 
-const tileLayerRef = useLeafletLayer(() => L.tileLayer(props.urlTemplate, props.options));
+const tileLayerRef = useLeafletLayer(() => L.tileLayer(props.urlTemplate, props.options), {
+    attrs,
+    events: layerEvents,
+});
 
 watch(
     () => props.urlTemplate,

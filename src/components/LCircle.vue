@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import L, { CircleOptions, LatLngExpression } from 'leaflet'
-import { PropType, watch } from 'vue';
+import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
+import { layerEvents } from '../utils/events';
+
+const attrs = useAttrs();
 
 const props = defineProps({
   latlng: {
@@ -13,7 +16,10 @@ const props = defineProps({
     required: false
   }
 })
-const circleRef = useLeafletLayer(() => L.circle(props.latlng, props.options ?? {}));
+const circleRef = useLeafletLayer(() => L.circle(props.latlng, props.options ?? {}), {
+  attrs,
+  events: layerEvents,
+});
 
 watch(
   () => props.latlng,

@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import L, { PolylineOptions, LatLngExpression } from 'leaflet'
-import { PropType, watch } from 'vue';
+import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
+import { layerEvents } from '../utils/events';
+
+const attrs = useAttrs();
 
 const props = defineProps({
   latlngs: {
@@ -14,7 +17,10 @@ const props = defineProps({
     }
 })
 
-const polylineRef = useLeafletLayer(() => L.polyline(props.latlngs, props.options));
+const polylineRef = useLeafletLayer(() => L.polyline(props.latlngs, props.options), {
+  attrs,
+  events: layerEvents,
+});
 
 watch(
   () => props.latlngs,

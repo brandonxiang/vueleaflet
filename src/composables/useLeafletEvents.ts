@@ -1,4 +1,5 @@
 import type { Evented, LeafletEvent } from 'leaflet';
+import type { useAttrs } from 'vue';
 
 export type LeafletEventHandler = (event: LeafletEvent) => void;
 
@@ -21,3 +22,28 @@ export const bindLeafletEvents = (
   };
 };
 
+type Attrs = ReturnType<typeof useAttrs>;
+
+const toVueListenerName = (eventName: string) => {
+  return `on${eventName.charAt(0).toUpperCase()}${eventName.slice(1)}`;
+};
+
+export const bindLeafletEventsFromAttrs = (
+  target: Evented,
+  attrs: Attrs,
+  eventNames: string[]
+) => {
+  const events = eventNames.reduce<Record<string, LeafletEventHandler | undefined>>((result, eventName) => {
+    const listener = attrs[toVueListenerName(eventName)];
+
+    if (typeof listener === 'function') {
+      result[eventName] = (event) => {
+        listener(event);
+      };
+    }
+
+    return result;
+  }, {});
+
+  return bindLeafletEvents(target, events);
+};

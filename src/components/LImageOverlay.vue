@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import L, { type ImageOverlayOptions, type LatLngBoundsExpression } from 'leaflet';
-import { type PropType, watch } from 'vue';
+import { type PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
 import { toLatLngBounds } from '../utils/bounds';
+import { layerEvents } from '../utils/events';
+
+const attrs = useAttrs();
 
 const props = defineProps({
   url: {
@@ -19,7 +22,10 @@ const props = defineProps({
   },
 });
 
-const imageOverlayRef = useLeafletLayer(() => L.imageOverlay(props.url, props.bounds, props.options));
+const imageOverlayRef = useLeafletLayer(() => L.imageOverlay(props.url, props.bounds, props.options), {
+  attrs,
+  events: layerEvents,
+});
 
 watch(
   () => props.url,

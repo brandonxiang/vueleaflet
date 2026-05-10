@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import L, { PolylineOptions, LatLngExpression, LatLngBoundsExpression } from 'leaflet'
-import { PropType, watch } from 'vue';
+import { PropType, useAttrs, watch } from 'vue';
 import { useLeafletLayer } from '../composables/useLeafletLayer';
+import { layerEvents } from '../utils/events';
+
+const attrs = useAttrs();
 
 const props = defineProps({
   latLngBounds: {
@@ -14,7 +17,10 @@ const props = defineProps({
   }
 })
 
-const rectangleRef = useLeafletLayer(() => L.rectangle(props.latLngBounds, props.options));
+const rectangleRef = useLeafletLayer(() => L.rectangle(props.latLngBounds, props.options), {
+  attrs,
+  events: layerEvents,
+});
 
 watch(
   () => props.latLngBounds,
