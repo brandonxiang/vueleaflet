@@ -52,13 +52,29 @@ Common events: `@click`, `@add`, `@remove`, `@popupopen`, `@tooltipopen`.
 
 ### `LMarker`
 
-| Prop      | Type               | Required | Description                                                                                         |
-| --------- | ------------------ | -------- | --------------------------------------------------------------------------------------------------- |
-| `id`      | `string`           | Yes      | Marker id used by nested popup and tooltip components.                                              |
-| `latlng`  | `LatLngExpression` | Yes      | Marker position.                                                                                    |
-| `options` | `MarkerOptions`    | No       | Options passed to `L.marker`; `icon`, `opacity`, `zIndexOffset`, and `draggable` update reactively. |
+| Prop       | Type               | Required | Description                                                                                         |
+| ---------- | ------------------ | -------- | --------------------------------------------------------------------------------------------------- |
+| `id`       | `string`           | Yes      | Marker id used by nested popup and tooltip components.                                              |
+| `latlng`   | `LatLngExpression` | No       | Marker position. Required unless `position` is provided.                                            |
+| `position` | `LatLngExpression` | No       | Alias for `latlng`, kept for compatibility with older examples.                                     |
+| `options`  | `MarkerOptions`    | No       | Options passed to `L.marker`; `icon`, `opacity`, `zIndexOffset`, and `draggable` update reactively. |
 
 Common events: `@click`, `@dragstart`, `@drag`, `@dragend`, `@move`, `@popupopen`, `@tooltipopen`.
+
+Dynamic marker lists can start empty and add markers later:
+
+```vue
+<template>
+  <LMarker
+    v-for="(params, user) in points"
+    :id="user"
+    :key="user"
+    :position="params.pos"
+  >
+    <LTooltip :options="{ content: user }" />
+  </LMarker>
+</template>
+```
 
 ### `LPopup`
 
