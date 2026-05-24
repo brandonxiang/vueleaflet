@@ -1,36 +1,39 @@
 name: github-pages
 
-on: push
+on:
+  push:
+    branches:
+      - main
+      - master
+      - next
+
+permissions:
+  contents: write
 
 jobs:
   pages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: 24
+          cache: pnpm
 
-      - name: Cache .pnpm-store
-        uses: actions/cache@v2
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - name: install pnpm and npm
-        run: |
-          curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@dev npm@6
-      - name: pnpm install
-        run: pnpm install
-      - name: build pages
+      - name: Build pages
         run: pnpm run build:example
 
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
