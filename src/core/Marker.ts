@@ -14,10 +14,15 @@ const setMarker = (key: string, content: Marker) => {
   marker.value[key] = content;
 };
 
+const removeMarker = (key: string) => {
+  delete marker.value[key];
+};
+
 export const markerProvide = {
   marker,
   getMarker,
   setMarker,
+  removeMarker,
 };
 
 export type MarkerProvide = typeof markerProvide;

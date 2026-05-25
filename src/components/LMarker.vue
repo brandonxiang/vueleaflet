@@ -2,6 +2,7 @@
 import L, { type LatLngExpression, type MarkerOptions } from 'leaflet';
 import {
   type PropType,
+  computed,
   nextTick,
   onBeforeUnmount,
   provide,
@@ -28,8 +29,12 @@ const props = defineProps({
     required: true,
   },
   latlng: {
-    type: Object as PropType<LatLngExpression>,
-    required: true,
+    type: [Object, Array] as PropType<LatLngExpression>,
+    required: false,
+  },
+  position: {
+    type: [Object, Array] as PropType<LatLngExpression>,
+    required: false,
   },
   options: {
     type: Object as PropType<MarkerOptions>,
@@ -48,19 +53,37 @@ const attrs = useAttrs();
 let marker: L.Marker | null = null;
 let unbindEvents: (() => void) | undefined;
 
-nextTick(() => {
+const markerLatLng = computed(() => props.latlng ?? props.position);
+
+const createMarker = (latlng: LatLngExpression) => {
+  if (marker) return;
+
   fixImageUrl();
-  marker = L.marker(props.latlng, props.options);
+  marker = L.marker(latlng, props.options);
   unbindEvents = bindLeafletEventsFromAttrs(marker, attrs, markerEvents);
 
   markerProvide.setMarker(markerKey, marker);
   layerProvider?.addLayer(marker);
+};
+
+nextTick(() => {
+  const latlng = markerLatLng.value;
+  if (latlng) {
+    createMarker(latlng);
+  }
 });
 
 watch(
-  () => props.latlng,
+  markerLatLng,
   (latlng) => {
-    marker?.setLatLng(latlng);
+    if (!latlng) return;
+
+    if (marker) {
+      marker.setLatLng(latlng);
+      return;
+    }
+
+    createMarker(latlng);
   },
   { deep: true }
 );
@@ -78,6 +101,7 @@ onBeforeUnmount(() => {
   if (marker) {
     layerProvider?.removeLayer(marker);
   }
+  markerProvide.removeMarker(markerKey);
 });
 
 defineExpose({

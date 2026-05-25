@@ -15,4 +15,13 @@ describe('markerProvide', () => {
     expect(markerProvide.getMarker('marker-main')).toEqual(marker);
     expect(markerProvide.marker.value['marker-main']).toEqual(marker);
   });
+
+  it('removes markers by key', () => {
+    const marker = { id: 'leaflet-marker' } as unknown as Marker;
+
+    markerProvide.setMarker('marker-removable', marker);
+    markerProvide.removeMarker('marker-removable');
+
+    expect(markerProvide.getMarker('marker-removable')).toBeNull();
+  });
 });
