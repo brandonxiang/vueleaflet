@@ -1,4 +1,4 @@
-import type { Marker, Layer, Popup, Tooltip, Control } from 'leaflet';
+import type { Marker } from 'leaflet';
 import { ref } from 'vue';
 
 const marker = ref<Record<string, Marker>>({});

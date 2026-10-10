@@ -2,3 +2,12 @@ overrides:
   glob: 12.0.0
   js-cookie: 3.0.7
   ws: 8.20.1
+  vite@*: 'catalog:'
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@1.1.0
+  vite-plus: 1.1.0
+peerDependencyRules:
+  allowAny:
+    - vite
+  allowedVersions:
+    vite: '*'

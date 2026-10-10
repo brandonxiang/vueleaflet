@@ -100,19 +100,19 @@ Dynamic marker lists can start empty and add markers later:
 
 ### `LVideoOverlay`
 
-| Prop      | Type                     | Required  | Description                         |
-| --------- | ------------------------ | --------- | ----------------------------------- | ------------------------------- |
-| `url`     | `string                  | string[]` | Yes                                 | Video URL or fallback URL list. |
-| `bounds`  | `LatLngBoundsExpression` | Yes       | Video bounds.                       |
-| `options` | `VideoOverlayOptions`    | No        | Options passed to `L.videoOverlay`. |
+| Prop      | Type                     | Required | Description                         |
+| --------- | ------------------------ | -------- | ----------------------------------- |
+| `url`     | `string \| string[]`     | Yes      | Video URL or fallback URL list.     |
+| `bounds`  | `LatLngBoundsExpression` | Yes      | Video bounds.                       |
+| `options` | `VideoOverlayOptions`    | No       | Options passed to `L.videoOverlay`. |
 
 ### `LSVGOverlay`
 
-| Prop      | Type                     | Required    | Description                       |
-| --------- | ------------------------ | ----------- | --------------------------------- | ----------------------- |
-| `svg`     | `string                  | SVGElement` | Yes                               | SVG content or element. |
-| `bounds`  | `LatLngBoundsExpression` | Yes         | SVG bounds.                       |
-| `options` | `ImageOverlayOptions`    | No          | Options passed to `L.svgOverlay`. |
+| Prop      | Type                     | Required | Description                       |
+| --------- | ------------------------ | -------- | --------------------------------- |
+| `svg`     | `string \| SVGElement`   | Yes      | SVG content or element.           |
+| `bounds`  | `LatLngBoundsExpression` | Yes      | SVG bounds.                       |
+| `options` | `ImageOverlayOptions`    | No       | Options passed to `L.svgOverlay`. |
 
 Overlay events: `@click`, `@add`, `@remove`, `@popupopen`, `@tooltipopen`.
 
@@ -134,17 +134,17 @@ Overlay events: `@click`, `@add`, `@remove`, `@popupopen`, `@tooltipopen`.
 
 ### `LPolygon`
 
-| Prop      | Type                | Required             | Description                                              |
-| --------- | ------------------- | -------------------- | -------------------------------------------------------- | --- | -------------------- |
-| `latlngs` | `LatLngExpression[] | LatLngExpression[][] | LatLngExpression[][][]`                                  | Yes | Polygon coordinates. |
-| `options` | `PolylineOptions`   | No                   | Options passed to `L.polygon`; style updates reactively. |
+| Prop      | Type                                                                   | Required | Description                                              |
+| --------- | ---------------------------------------------------------------------- | -------- | -------------------------------------------------------- |
+| `latlngs` | `LatLngExpression[] \| LatLngExpression[][] \| LatLngExpression[][][]` | Yes      | Polygon coordinates.                                     |
+| `options` | `PolylineOptions`                                                      | No       | Options passed to `L.polygon`; style updates reactively. |
 
 ### `LPolyline`
 
-| Prop      | Type                | Required              | Description                                               |
-| --------- | ------------------- | --------------------- | --------------------------------------------------------- | --------------------- |
-| `latlngs` | `LatLngExpression[] | LatLngExpression[][]` | Yes                                                       | Polyline coordinates. |
-| `options` | `PolylineOptions`   | No                    | Options passed to `L.polyline`; style updates reactively. |
+| Prop      | Type                                         | Required | Description                                               |
+| --------- | -------------------------------------------- | -------- | --------------------------------------------------------- |
+| `latlngs` | `LatLngExpression[] \| LatLngExpression[][]` | Yes      | Polyline coordinates.                                     |
+| `options` | `PolylineOptions`                            | No       | Options passed to `L.polyline`; style updates reactively. |
 
 ### `LRectangle`
 
